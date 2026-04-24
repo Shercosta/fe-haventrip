@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "../components/ui/button";
+import { Button } from "../ui/button";
 import { HavenTripText } from "./Haventrip-Text";
 import { Menu } from "lucide-react";
 

@@ -1,4 +1,4 @@
-import { cn } from "../lib/common";
+import { cn } from "../../lib/common";
 
 interface HavenTripTextProps {
   classNameBoth?: string;
