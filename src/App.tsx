@@ -4,7 +4,7 @@ import { Navbar } from "./components/local/Navbar";
 import { destinations } from "./arrays/destinations";
 import { cn } from "./lib/utils";
 import { Button } from "./components/ui/button";
-import { MapPin } from "lucide-react";
+import { ChevronRightCircle, MapPin } from "lucide-react";
 
 function App() {
   const [heroDestination] = useState(
@@ -23,7 +23,7 @@ function App() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="w-[100%] h-[100%] p-5">
+        <div className="w-[100%] h-[90%] lg:h-[100%] p-5">
           <div className="w-full h-full border-4 border-white/30 rounded-[35px] py-8 px-10 flex flex-col">
             {/* navbar */}
             <Navbar />
@@ -38,11 +38,9 @@ function App() {
                         "block leading-[0.8] text-4xl sm:text-5xl md:text-6xl lg:text-[80px]",
                         "break-words",
                         "text-right md:text-left",
-                        catchphrase.colorHex
-                          ? `text-[${catchphrase.colorHex}]`
-                          : "text-white",
                       ])}
                       style={{
+                        color: catchphrase.colorHex ?? "white",
                         opacity: catchphrase.opacity ?? 1,
                       }}
                     >
@@ -74,9 +72,13 @@ function App() {
                 </div>
                 <div>
                   <div className="flex flex-col gap-4 bg-black/30 backdrop-blur-sm rounded-xl p-4 text-white">
-                    <span className="text-xl block">
-                      {heroDestination.name}
-                    </span>
+                    <div className="text-xl flex justify-between">
+                      <div>{heroDestination.name}</div>
+                      <ChevronRightCircle className="text-white/40" />
+                    </div>
+                    <div className="flex lg:hidden text-lg gap-2 items-center text-white/60">
+                      <MapPin /> {heroDestination.location}
+                    </div>
                     <span className="block">
                       Rp {heroDestination.price.toLocaleString()}
                     </span>
