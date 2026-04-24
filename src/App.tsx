@@ -36,6 +36,7 @@ function App() {
                       className={cn([
                         "block leading-[0.8] text-4xl sm:text-5xl md:text-6xl lg:text-[80px]",
                         "break-words",
+                        "text-right md:text-left",
                         catchphrase.colorHex
                           ? `text-[${catchphrase.colorHex}]`
                           : "text-white",
