@@ -37,7 +37,6 @@ export function Hero({ heroDestination }: HeroProps) {
           </span>
         </>
       )}
-      {/* need this to take up the height of the remaining space */}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-3 items-end">
         <div className="hidden lg:block">
           <div className="flex lg:max-w-[60%] text-white">
