@@ -1,4 +1,5 @@
 import "./App.css";
+import { HavenTripText } from "./local-components/haventrip-text";
 
 function App() {
   return (
@@ -11,19 +12,21 @@ function App() {
           width: "100vw",
           height: "100vh",
           backgroundPosition: "center",
-          backgroundSize: "cover", // 👈 THIS is the important one
-          backgroundRepeat: "no-repeat", // 👈 optional but recommended
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
         }}
       >
         <div className="w-[100%] h-[100%] p-5">
-          <div className="w-full h-full border-4 border-white/30 rounded-xl py-8 px-10">
+          <div className="w-full h-full border-4 border-white/30 rounded-[35px] py-8 px-10">
             {/* navbar */}
             <div className="flex w-full">
-              <div>
+              <div className="flex items-center gap-2">
                 <img
                   src="https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/logo-only-transparent.png"
                   alt="haventrip logo"
+                  width={36}
                 />
+                <HavenTripText classNameBoth="drop-shadow-lg" />
               </div>
             </div>
           </div>
