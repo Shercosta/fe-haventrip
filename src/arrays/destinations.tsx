@@ -15,6 +15,9 @@ export interface Destination {
   catchphrases?: Catchphrase_Destination[];
   images: Image_Destination[];
   isHero: boolean;
+  description: string;
+  price: number;
+  location: string;
 }
 
 export const destinations: Destination[] = [
@@ -28,7 +31,7 @@ export const destinations: Destination[] = [
       {
         text: "Perfect",
         colorHex: "#FFFFFF",
-        opacity: 0.6,
+        opacity: 0.7,
       },
       {
         text: "Hideaways",
@@ -41,5 +44,9 @@ export const destinations: Destination[] = [
       },
     ],
     isHero: true,
+    description:
+      "Discover handpicked luxury cabins in breathtaking locations. Unplug, unwind, and reconnect with what matters most.",
+    price: 300_000,
+    location: "Bogor",
   },
 ];

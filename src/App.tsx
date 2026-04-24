@@ -3,6 +3,8 @@ import "./App.css";
 import { Navbar } from "./components/local/Navbar";
 import { destinations } from "./arrays/destinations";
 import { cn } from "./lib/utils";
+import { Button } from "./components/ui/button";
+import { MapPin } from "lucide-react";
 
 function App() {
   const [heroDestination] = useState(
@@ -22,12 +24,11 @@ function App() {
         }}
       >
         <div className="w-[100%] h-[100%] p-5">
-          <div className="w-full h-full border-4 border-white/30 rounded-[35px] py-8 px-10">
+          <div className="w-full h-full border-4 border-white/30 rounded-[35px] py-8 px-10 flex flex-col">
             {/* navbar */}
             <Navbar />
-
             {/* content */}
-            <div>
+            <div className="flex flex-col flex-1">
               {heroDestination.catchphrases ? (
                 heroDestination.catchphrases.map(
                   (catchphrase, catchphrase_idx) => (
@@ -59,6 +60,32 @@ function App() {
                   </span>
                 </>
               )}
+              {/* need this to take up the height of the remaining space */}
+              <div className="flex-1 grid grid-cols-1 md:grid-cols-3 items-end">
+                <div className="hidden lg:block">
+                  <div className="flex lg:max-w-[60%] text-white">
+                    {heroDestination.description}
+                  </div>
+                </div>
+                <div className="text-white hidden lg:block">
+                  <div className="flex text-lg gap-2 items-center">
+                    <MapPin /> {heroDestination.location}
+                  </div>
+                </div>
+                <div>
+                  <div className="flex flex-col gap-4 bg-black/30 backdrop-blur-sm rounded-xl p-4 text-white">
+                    <span className="text-xl block">
+                      {heroDestination.name}
+                    </span>
+                    <span className="block">
+                      Rp {heroDestination.price.toLocaleString()}
+                    </span>
+                    <Button className="w-full" variant={"secondary"}>
+                      Reservasi
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

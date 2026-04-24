@@ -7,7 +7,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="w-full relative">
+    <nav className="w-full relative mb-10">
       {/* Top bar */}
       <div className="flex items-center justify-between">
         {/* Logo */}
