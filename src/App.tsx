@@ -26,7 +26,7 @@ function App() {
                   alt="haventrip logo"
                   width={36}
                 />
-                <HavenTripText classNameBoth="drop-shadow-lg" />
+                <HavenTripText classNameBoth="text-shadow-white-glow text-xl" />
               </div>
             </div>
           </div>
