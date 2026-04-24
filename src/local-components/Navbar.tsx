@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { HavenTripText } from "./Haventrip-Text";
+import { Menu } from "lucide-react";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -20,7 +21,7 @@ export function Navbar() {
         </div>
 
         {/* Desktop menu */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-2 bg-black/10 backdrop-blur-sm px-4 py-2 rounded-xl">
           <Button
             variant={"none"}
             className="text-white/80 font-normal hover:text-white"
@@ -38,13 +39,13 @@ export function Navbar() {
 
         {/* Mobile toggle */}
         <button className="md:hidden text-white" onClick={() => setOpen(!open)}>
-          ☰
+          <Menu />
         </button>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className="mt-4 flex flex-col gap-2 md:hidden bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/20">
+        <div className="mt-4 flex flex-col gap-2 md:hidden bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/20 transition-all duration-300">
           <Button
             variant={"none"}
             className="text-white/80 justify-start hover:text-white"
