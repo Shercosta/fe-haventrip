@@ -14,6 +14,18 @@ export function Navbar() {
       </div>
 
       <div className="flex">
+        <Button
+          variant={"none"}
+          className="text-white/80 font-normal text-shadow-lg/20 hover:text-white"
+        >
+          Destinasi
+        </Button>
+        <Button
+          variant={"none"}
+          className="text-white/80 font-normal text-shadow-lg/20 hover:text-white"
+        >
+          Kontak
+        </Button>
         <Button variant={"secondary"}>Pesan Sekarang</Button>
       </div>
     </div>
