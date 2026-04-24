@@ -7,7 +7,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="w-full">
+    <nav className="w-full relative">
       {/* Top bar */}
       <div className="flex items-center justify-between">
         {/* Logo */}
@@ -45,20 +45,22 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="mt-4 flex flex-col gap-2 md:hidden bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/20 transition-all duration-300">
-          <Button
-            variant={"none"}
-            className="text-white/80 justify-start hover:text-white"
-          >
-            Destinasi
-          </Button>
-          <Button
-            variant={"none"}
-            className="text-white/80 justify-start hover:text-white"
-          >
-            Kontak
-          </Button>
-          <Button variant={"secondary"}>Pesan Sekarang</Button>
+        <div className="absolute top-full left-0 w-full mt-4 md:hidden bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/20 transition-all duration-300 z-50">
+          <div className="flex flex-col gap-2">
+            <Button
+              variant={"none"}
+              className="text-white/80 justify-start hover:text-white"
+            >
+              Destinasi
+            </Button>
+            <Button
+              variant={"none"}
+              className="text-white/80 justify-start hover:text-white"
+            >
+              Kontak
+            </Button>
+            <Button variant={"secondary"}>Pesan Sekarang</Button>
+          </div>
         </div>
       )}
     </nav>
