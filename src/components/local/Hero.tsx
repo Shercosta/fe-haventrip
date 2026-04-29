@@ -22,6 +22,7 @@ export function Hero({ heroDestination }: HeroProps) {
             style={{
               color: catchphrase.colorHex ?? "white",
               opacity: catchphrase.opacity ?? 1,
+              textShadow: "0 4px 12px rgba(0, 0, 0, 0.7)",
             }}
           >
             {catchphrase.text}
@@ -39,7 +40,10 @@ export function Hero({ heroDestination }: HeroProps) {
       )}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-3 items-end">
         <div className="hidden lg:block">
-          <div className="flex lg:max-w-[60%] text-white font-light">
+          <div
+            className="flex lg:max-w-[60%] text-white font-light leading-[1.2]"
+            style={{ textShadow: "0 4px 12px rgba(0, 0, 0, 0.7)" }}
+          >
             {heroDestination.description}
           </div>
         </div>
