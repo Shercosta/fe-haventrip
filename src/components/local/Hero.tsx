@@ -2,8 +2,9 @@ import { type Destination } from "../../arrays/destinations";
 import { ChevronRightCircle, MapPin } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "../../lib/utils";
+import { ExpandableDate } from "./Expandable-Date";
 
-interface HeroProps {
+export interface HeroProps {
   heroDestination: Destination;
 }
 
@@ -58,6 +59,9 @@ export function Hero({ heroDestination }: HeroProps) {
               <div>{heroDestination.name}</div>
               <ChevronRightCircle className="text-white/40" />
             </div>
+
+            <ExpandableDate heroDestination={heroDestination} />
+
             <div className="flex lg:hidden text-lg gap-2 items-center text-white/60">
               <MapPin /> {heroDestination.location}
             </div>

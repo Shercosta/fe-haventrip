@@ -18,6 +18,8 @@ export interface Destination {
   description: string;
   price: number;
   location: string;
+  trip_duration: number; // in days
+  next_available_dates: string[];
 }
 
 export const destinations: Destination[] = [
@@ -48,5 +50,7 @@ export const destinations: Destination[] = [
       "Nikmati pasir putih, laut sebening kristal, dan suasana pulau yang tenang di Pulau Pari. Tempat sempurna untuk healing, snorkeling, dan menikmati sunset romantis hanya beberapa jam dari Jakarta.",
     price: 180_000,
     location: "Kepulauan Seribu",
+    trip_duration: 1,
+    next_available_dates: ["2026-06-06"],
   },
 ];
