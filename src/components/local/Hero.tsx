@@ -57,7 +57,9 @@ export function Hero({ heroDestination }: HeroProps) {
         <div>
           <div className="flex flex-col gap-4 bg-black/30 backdrop-blur-sm rounded-xl p-4 text-white">
             <div className="text-xl flex justify-between">
-              <div>{heroDestination.name}</div>
+              <div className="font-semibold text-2xl">
+                {heroDestination.name}
+              </div>
               <ChevronRightCircle className="text-white/40" />
             </div>
 

@@ -3,6 +3,8 @@ import type { HeroProps } from "./Hero";
 
 export function ExpandableDate({ heroDestination }: HeroProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const nextDate = heroDestination.next_available_dates[0];
+  const [selectedDate, setSelectedDate] = useState(nextDate);
 
   return (
     <div className="relative">
@@ -10,13 +12,13 @@ export function ExpandableDate({ heroDestination }: HeroProps) {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-white/60 text-xs uppercase tracking-wider">
-            Tanggal Selanjutnya
+            {selectedDate === nextDate
+              ? "Tanggal Selanjutnya"
+              : "Tanggal Dipilih"}
           </p>
 
-          <h4 className="text-lg font-semibold">
-            {new Date(
-              heroDestination.next_available_dates[0],
-            ).toLocaleDateString("id-ID", {
+          <h4 className="text-sm font-semibold">
+            {new Date(selectedDate).toLocaleDateString("id-ID", {
               weekday: "short",
               day: "numeric",
               month: "long",
@@ -70,10 +72,15 @@ export function ExpandableDate({ heroDestination }: HeroProps) {
                   hover:scale-105
                   transition-all
                 "
+                onClick={() => {
+                  setSelectedDate(date);
+                  setIsOpen(false);
+                }}
               >
                 {new Date(date).toLocaleDateString("id-ID", {
+                  weekday: "short",
                   day: "numeric",
-                  month: "short",
+                  month: "long",
                 })}
               </button>
             ))}

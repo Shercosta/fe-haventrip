@@ -51,6 +51,6 @@ export const destinations: Destination[] = [
     price: 180_000,
     location: "Kepulauan Seribu",
     trip_duration: 1,
-    next_available_dates: ["2026-06-06"],
+    next_available_dates: ["2026-06-06", "2026-06-07", "2026-06-08"],
   },
 ];
