@@ -43,10 +43,10 @@ export const destinations: Destination[] = [
         highlight: true,
       },
     ],
-    isHero: false,
+    isHero: true,
     description:
       "Nikmati pasir putih, laut sebening kristal, dan suasana pulau yang tenang di Pulau Pari. Tempat sempurna untuk healing, snorkeling, dan menikmati sunset romantis hanya beberapa jam dari Jakarta.",
-    price: 350_000,
+    price: 180_000,
     location: "Kepulauan Seribu",
   },
 ];
