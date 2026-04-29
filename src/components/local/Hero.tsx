@@ -3,6 +3,7 @@ import { ChevronRightCircle, MapPin } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "../../lib/utils";
 import { ExpandableDate } from "./Expandable-Date";
+import { tripDurationToContext } from "../../lib/common";
 
 export interface HeroProps {
   heroDestination: Destination;
@@ -65,9 +66,15 @@ export function Hero({ heroDestination }: HeroProps) {
             <div className="flex lg:hidden text-lg gap-2 items-center text-white/60">
               <MapPin /> {heroDestination.location}
             </div>
-            <span className="block">
-              Rp {heroDestination.price.toLocaleString()}
-            </span>
+            <div className="flex flex-row gap-2 justify-between items-end">
+              <span>
+                Rp {heroDestination.price.toLocaleString()}
+                <span className="text-xs opacity-60">/orang</span>
+              </span>
+              <span className="text-xs">
+                {tripDurationToContext(heroDestination.trip_duration)}
+              </span>
+            </div>
             <Button className="w-full" variant={"secondary"}>
               Reservasi
             </Button>
