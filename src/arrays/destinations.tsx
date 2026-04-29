@@ -23,30 +23,30 @@ export interface Destination {
 export const destinations: Destination[] = [
   {
     id: 1,
-    name: "Evergreen Pine Family Lodge",
+    name: "Pulau Pari",
     catchphrases: [
       {
-        text: "Nature's",
+        text: "Surga",
       },
       {
-        text: "Perfect",
+        text: "Tropis",
         colorHex: "#FFFFFF",
-        opacity: 0.65,
+        opacity: 0.7,
       },
       {
-        text: "Hideaways",
+        text: "Dekat Jakarta",
       },
     ],
     images: [
       {
-        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pinewood.jpg",
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari.webp",
         highlight: true,
       },
     ],
-    isHero: true,
+    isHero: false,
     description:
-      "Discover handpicked luxury cabins in breathtaking locations. Unplug, unwind, and reconnect with what matters most.",
-    price: 300_000,
-    location: "Bogor",
+      "Nikmati pasir putih, laut sebening kristal, dan suasana pulau yang tenang di Pulau Pari. Tempat sempurna untuk healing, snorkeling, dan menikmati sunset romantis hanya beberapa jam dari Jakarta.",
+    price: 350_000,
+    location: "Kepulauan Seribu",
   },
 ];
