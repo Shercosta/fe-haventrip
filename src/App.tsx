@@ -3,6 +3,7 @@ import "./App.css";
 import { Navbar } from "./components/local/Navbar";
 import { destinations } from "./arrays/destinations";
 import { Hero } from "./components/local/Hero";
+import { Destination } from "./components/local/Destination";
 
 function App() {
   const [heroDestination] = useState(
@@ -30,6 +31,8 @@ function App() {
           </div>
         </div>
       </div>
+
+      <Destination />
     </section>
   );
 }
