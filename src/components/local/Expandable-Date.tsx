@@ -2,10 +2,10 @@ import { useState } from "react";
 import type { HeroProps } from "./Hero";
 
 export function ExpandableDate({ heroDestination }: HeroProps) {
-  const [openDates, setOpenDates] = useState<Record<number, boolean>>({});
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div>
+    <div className="relative">
       {/* Next Available */}
       <div className="flex items-center justify-between">
         <div>
@@ -25,32 +25,59 @@ export function ExpandableDate({ heroDestination }: HeroProps) {
         </div>
 
         <button
-          onClick={() =>
-            setOpenDates((prev) => ({
-              ...prev,
-              [heroDestination.id]: !prev[heroDestination.id],
-            }))
-          }
-          className="text-sm px-4 py-2 rounded-full bg-white/15 hover:bg-white/25 transition-all"
+          onClick={() => setIsOpen(!isOpen)}
+          className="
+            text-sm px-4 py-2 rounded-full
+            bg-white/15 hover:bg-white/25
+            transition-all
+          "
         >
-          {openDates[heroDestination.id] ? "Tutup" : "Lainnya"}
+          {isOpen ? "Tutup" : "Lainnya"}
         </button>
       </div>
 
-      {/* Expandable Dates */}
-      {openDates[heroDestination.id] && (
-        <div className="flex flex-wrap gap-2 mt-4">
-          {heroDestination.next_available_dates.map((date) => (
-            <button
-              key={date}
-              className="px-3 py-2 rounded-full bg-white text-slate-900 text-sm hover:scale-105 transition-all"
-            >
-              {new Date(date).toLocaleDateString("id-ID", {
-                day: "numeric",
-                month: "short",
-              })}
-            </button>
-          ))}
+      {/* Floating Dropdown Dates */}
+      {isOpen && (
+        <div
+          className="
+            absolute
+            top-full
+            left-0
+            mt-3
+            z-50
+
+            w-[320px]
+
+            rounded-2xl
+            border border-white/10
+            bg-black/70
+            backdrop-blur-xl
+
+            p-4
+            shadow-2xl
+          "
+        >
+          <div className="flex flex-wrap gap-2">
+            {heroDestination.next_available_dates.map((date) => (
+              <button
+                key={date}
+                className="
+                  px-3 py-2
+                  rounded-full
+                  bg-white
+                  text-slate-900
+                  text-sm
+                  hover:scale-105
+                  transition-all
+                "
+              >
+                {new Date(date).toLocaleDateString("id-ID", {
+                  day: "numeric",
+                  month: "short",
+                })}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>
