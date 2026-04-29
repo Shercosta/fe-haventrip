@@ -15,3 +15,18 @@ export function tripDurationToContext(trip_duration: number) {
       return `${trip_duration} Hari ${trip_duration - 1} Malam`;
   }
 }
+
+export function ellipseText(text: string, maxLength: number) {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength - 3) + "...";
+  }
+  return text;
+}
+
+export function defaultDateShow(dateString: string) {
+  return new Date(dateString).toLocaleDateString("id-ID", {
+    weekday: "short",
+    day: "numeric",
+    month: "long",
+  });
+}

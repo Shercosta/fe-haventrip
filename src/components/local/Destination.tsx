@@ -1,19 +1,12 @@
-import { useMemo, useState } from "react";
 import { destinations } from "../../arrays/destinations";
+import { CircleChevronRight } from "lucide-react";
+import {
+  defaultDateShow,
+  ellipseText,
+  tripDurationToContext,
+} from "../../lib/common";
 
 export function Destination() {
-  const [selectedLocation, setSelectedLocation] = useState("all");
-
-  const locations = useMemo(() => {
-    return ["all", ...new Set(destinations.map((d) => d.location))];
-  }, []);
-
-  const filteredDestinations = useMemo(() => {
-    if (selectedLocation === "all") return destinations;
-
-    return destinations.filter((d) => d.location === selectedLocation);
-  }, [selectedLocation]);
-
   return (
     <section className="w-full px-4 md:px-10 lg:px-16 py-20 bg-[#f8fbff]">
       {/* Header */}
@@ -33,58 +26,7 @@ export function Destination() {
           </p>
         </div>
 
-        {/* Responsive Filter */}
-        <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-          {/* Mobile Select */}
-          <select
-            value={selectedLocation}
-            onChange={(e) => setSelectedLocation(e.target.value)}
-            className="
-              sm:hidden
-              w-full
-              rounded-2xl
-              border border-slate-200
-              bg-white
-              px-4 py-3
-              text-slate-700
-              outline-none
-            "
-          >
-            {locations.map((location) => (
-              <option key={location} value={location}>
-                {location === "all" ? "Semua Destinasi" : location}
-              </option>
-            ))}
-          </select>
-
-          {/* Desktop Pills */}
-          <div className="hidden sm:flex flex-wrap gap-3">
-            {locations.map((location) => {
-              const isActive = selectedLocation === location;
-
-              return (
-                <button
-                  key={location}
-                  onClick={() => setSelectedLocation(location)}
-                  className={`
-                    px-5 py-3
-                    rounded-full
-                    transition-all
-                    border
-
-                    ${
-                      isActive
-                        ? "bg-slate-900 text-white border-slate-900"
-                        : "bg-white text-slate-700 border-slate-200 hover:border-slate-400"
-                    }
-                  `}
-                >
-                  {location === "all" ? "Semua" : location}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        {/* Filters */}
       </div>
 
       {/* Grid */}
@@ -97,11 +39,10 @@ export function Destination() {
         "
       >
         {[
-          ...filteredDestinations,
-          ...filteredDestinations,
-          ...filteredDestinations,
-
-          ...filteredDestinations,
+          ...destinations,
+          ...destinations,
+          ...destinations,
+          ...destinations,
         ].map((destination) => (
           <div
             key={destination.id}
@@ -177,7 +118,7 @@ export function Destination() {
                 text-white
               "
             >
-              <div className="flex items-center gap-2 text-white/80 mb-2 md:mb-3 text-xs md:text-base">
+              <div className="hidden lg:flex items-center gap-2 text-white/80 mb-2 md:mb-3 text-xs md:text-base">
                 <span>📍</span>
                 <span>{destination.location}</span>
               </div>
@@ -195,8 +136,13 @@ export function Destination() {
                   mb-6
                 "
               >
-                {destination.description}
+                {ellipseText(destination.description, 100)}
               </p>
+
+              <span className="text-xs lg:text-lg">
+                {tripDurationToContext(destination.trip_duration)} |{" "}
+                {defaultDateShow(destination.next_available_dates[0])}
+              </span>
 
               <div className="flex items-end justify-between gap-3">
                 <div>
@@ -210,21 +156,17 @@ export function Destination() {
                 <button
                   className="
                     px-3 py-2
-                    md:px-5 md:py-3
-
                     rounded-full
-
                     bg-white
                     text-slate-900
-
                     text-xs md:text-base
                     font-medium
-
                     hover:bg-slate-100
+                    hover:scale-105
                     transition-all
                   "
                 >
-                  Explore →
+                  <CircleChevronRight />
                 </button>
               </div>
             </div>
