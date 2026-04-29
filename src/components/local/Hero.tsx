@@ -39,7 +39,7 @@ export function Hero({ heroDestination }: HeroProps) {
       )}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-3 items-end">
         <div className="hidden lg:block">
-          <div className="flex lg:max-w-[60%] text-white">
+          <div className="flex lg:max-w-[60%] text-white font-light">
             {heroDestination.description}
           </div>
         </div>
