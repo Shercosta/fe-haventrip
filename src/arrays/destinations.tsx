@@ -168,7 +168,10 @@ export function getTripDurations() {
     durations.add(destination.trip_duration);
   });
 
-  return Array.from(durations);
+  const arrDuration = Array.from(durations);
+  arrDuration.sort((a, b) => a - b);
+
+  return Array.from(arrDuration);
 }
 
 export const priceRanges = [
