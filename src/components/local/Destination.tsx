@@ -29,6 +29,11 @@ export function Destination() {
     search: "",
   });
 
+  const isFiltered = useMemo(() => {
+    if (filter.search) return true;
+    return false;
+  }, [filter]);
+
   const filteredDestinations = useMemo(() => {
     let initialDestinations = destinations;
     if (filter.search) {
@@ -51,6 +56,12 @@ export function Destination() {
     }
     return initialDestinations;
   }, [filter]);
+
+  function resetFilter() {
+    setFilter({
+      search: "",
+    });
+  }
 
   return (
     <section
@@ -87,9 +98,11 @@ export function Destination() {
             placeholder="Cari destinasi"
           />
 
-          <Button variant={"destructive"}>
-            <FunnelX />
-          </Button>
+          {isFiltered && (
+            <Button onClick={resetFilter} variant={"destructive"}>
+              <FunnelX />
+            </Button>
+          )}
 
           <AlertDialog>
             <AlertDialogTrigger asChild>
