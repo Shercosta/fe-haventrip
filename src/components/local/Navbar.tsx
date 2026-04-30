@@ -52,6 +52,7 @@ export function Navbar() {
             <Button
               variant={"none"}
               className="text-white/80 justify-start hover:text-white"
+              onClick={() => idNavigator("destination")}
             >
               Destinasi
             </Button>
