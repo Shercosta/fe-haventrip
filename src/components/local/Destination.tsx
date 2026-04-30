@@ -24,13 +24,22 @@ import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { useMemo, useState } from "react";
 
+export interface FilterDestination {
+  search: string;
+  tripDurations: number[];
+}
+
 export function Destination() {
-  const [filter, setFilter] = useState({
+  const [filter, setFilter] = useState<FilterDestination>({
     search: "",
+    tripDurations: [],
   });
+
+  const [openFilter, setOpenFilter] = useState<FilterDestination>(filter);
 
   const isFiltered = useMemo(() => {
     if (filter.search) return true;
+    if (filter.tripDurations.length) return true;
     return false;
   }, [filter]);
 
@@ -54,13 +63,27 @@ export function Destination() {
         return null;
       });
     }
+
+    if (filter.tripDurations.length) {
+      initialDestinations = initialDestinations.filter((destination) => {
+        if (filter.tripDurations.includes(destination.trip_duration)) {
+          return destination;
+        }
+        return null;
+      });
+    }
     return initialDestinations;
   }, [filter]);
 
   function resetFilter() {
     setFilter({
       search: "",
+      tripDurations: [],
     });
+  }
+
+  function applyOpenFilter() {
+    setFilter(openFilter);
   }
 
   return (
@@ -114,9 +137,12 @@ export function Destination() {
 
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Filter</AlertDialogTitle>
+                <AlertDialogTitle onClick={() => console.log(openFilter)}>
+                  Filter
+                </AlertDialogTitle>
               </AlertDialogHeader>
               <AlertDialogDescription className="flex flex-col gap-4">
+                {/* Duration Filter */}
                 <p className="font-semibold">Durasi</p>
                 <div className="grid grid-cols-2">
                   {getTripDurations().map((duration) => (
@@ -124,6 +150,21 @@ export function Destination() {
                       <Checkbox
                         name={tripDurationToContext(duration)}
                         id={`filter-duration-${duration}`}
+                        onCheckedChange={(e) => {
+                          if (e) {
+                            setOpenFilter((prev) => ({
+                              ...prev,
+                              tripDurations: [...prev.tripDurations, duration],
+                            }));
+                          } else {
+                            setOpenFilter((prev) => ({
+                              ...prev,
+                              tripDurations: prev.tripDurations.filter(
+                                (tripDuration) => tripDuration !== duration,
+                              ),
+                            }));
+                          }
+                        }}
                       />
                       <Label htmlFor={`filter-duration-${duration}`}>
                         {tripDurationToContext(duration)}
@@ -159,7 +200,11 @@ export function Destination() {
                 <Button variant={"destructive"}>
                   <FunnelX /> Reset
                 </Button>
-                <AlertDialogAction size={"default"} variant={"default"}>
+                <AlertDialogAction
+                  onClick={applyOpenFilter}
+                  size={"default"}
+                  variant={"default"}
+                >
                   <FunnelPlus /> Terapkan
                 </AlertDialogAction>
               </AlertDialogFooter>
