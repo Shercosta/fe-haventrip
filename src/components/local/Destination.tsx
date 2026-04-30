@@ -22,8 +22,36 @@ import { Checkbox } from "../ui/checkbox";
 import { tripDurationToContext } from "@/lib/common";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { useMemo, useState } from "react";
 
 export function Destination() {
+  const [filter, setFilter] = useState({
+    search: "",
+  });
+
+  const filteredDestinations = useMemo(() => {
+    let initialDestinations = destinations;
+    if (filter.search) {
+      initialDestinations = initialDestinations.filter((destination) => {
+        if (
+          destination.name
+            .toLowerCase()
+            .includes(filter.search.toLowerCase()) ||
+          destination.location
+            .toLowerCase()
+            .includes(filter.search.toLowerCase()) ||
+          destination.description
+            .toLowerCase()
+            .includes(filter.search.toLowerCase())
+        ) {
+          return destination;
+        }
+        return null;
+      });
+    }
+    return initialDestinations;
+  }, [filter]);
+
   return (
     <section
       id="destination"
@@ -48,7 +76,16 @@ export function Destination() {
 
         {/* Filters */}
         <div className="flex gap-2">
-          <Input placeholder="Cari destinasi" />
+          <Input
+            value={filter.search}
+            onChange={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                search: e.target.value,
+              }));
+            }}
+            placeholder="Cari destinasi"
+          />
 
           <Button variant={"destructive"}>
             <FunnelX />
@@ -127,7 +164,7 @@ export function Destination() {
           gap-4 md:gap-8
         "
       >
-        {[...destinations].map((destination) => (
+        {[...filteredDestinations].map((destination) => (
           <DestinationCard key={destination.id} {...destination} />
         ))}
       </div>
