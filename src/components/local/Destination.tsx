@@ -27,12 +27,22 @@ import { useMemo, useState } from "react";
 export interface FilterDestination {
   search: string;
   tripDurations: number[];
+  priceRange: {
+    id: number;
+    min: number;
+    max: number | null;
+  };
 }
 
 export function Destination() {
   const [filter, setFilter] = useState<FilterDestination>({
     search: "",
     tripDurations: [],
+    priceRange: {
+      id: 0,
+      min: 0,
+      max: null,
+    },
   });
 
   const [openFilter, setOpenFilter] = useState<FilterDestination>(filter);
@@ -40,6 +50,8 @@ export function Destination() {
   const isFiltered = useMemo(() => {
     if (filter.search) return true;
     if (filter.tripDurations.length) return true;
+    if (filter.priceRange.min) return true; // max is not required
+    if (filter.priceRange.min !== 0) return true;
     return false;
   }, [filter]);
 
@@ -72,14 +84,34 @@ export function Destination() {
         return null;
       });
     }
+
+    if (filter.priceRange.min) {
+      initialDestinations = initialDestinations.filter((destination) => {
+        if (
+          destination.price >= filter.priceRange.min &&
+          (!filter.priceRange.max || destination.price <= filter.priceRange.max)
+        ) {
+          return destination;
+        }
+        return null;
+      });
+    }
+
     return initialDestinations;
   }, [filter]);
 
   function resetFilter() {
-    setFilter({
+    const resetValue = {
       search: "",
       tripDurations: [],
-    });
+      priceRange: {
+        id: 0,
+        min: 0,
+        max: null,
+      },
+    };
+    setFilter(resetValue);
+    setOpenFilter(resetValue);
   }
 
   function applyOpenFilter() {
@@ -150,6 +182,7 @@ export function Destination() {
                       <Checkbox
                         name={tripDurationToContext(duration)}
                         id={`filter-duration-${duration}`}
+                        checked={openFilter.tripDurations.includes(duration)}
                         onCheckedChange={(e) => {
                           if (e) {
                             setOpenFilter((prev) => ({
@@ -174,7 +207,26 @@ export function Destination() {
                 </div>
 
                 <p className="font-semibold">Harga</p>
-                <RadioGroup className="w-fit">
+                <RadioGroup
+                  className="w-fit"
+                  value={openFilter.priceRange.id.toString()}
+                  onValueChange={(value) => {
+                    const selected = priceRanges.find(
+                      (p) => p.id.toString() === value,
+                    );
+
+                    if (selected) {
+                      setOpenFilter((prev) => ({
+                        ...prev,
+                        priceRange: {
+                          id: selected.id,
+                          min: selected.min,
+                          max: selected.max || null,
+                        },
+                      }));
+                    }
+                  }}
+                >
                   {priceRanges.map((priceRange, priceRange_idx) => (
                     <div
                       key={priceRange_idx}
@@ -184,6 +236,7 @@ export function Destination() {
                         value={priceRange.id.toString()}
                         id={`r${priceRange_idx}`}
                       />
+
                       <Label htmlFor={`r${priceRange_idx}`}>
                         {priceRange.max
                           ? `${priceRange.min.toLocaleString()} - ${priceRange.max.toLocaleString()}`
@@ -197,7 +250,7 @@ export function Destination() {
                 <AlertDialogCancel size={"default"} variant={"outline"}>
                   Batal
                 </AlertDialogCancel>
-                <Button variant={"destructive"}>
+                <Button onClick={resetFilter} variant={"destructive"}>
                   <FunnelX /> Reset
                 </Button>
                 <AlertDialogAction
