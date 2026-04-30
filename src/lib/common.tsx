@@ -30,3 +30,9 @@ export function defaultDateShow(dateString: string) {
     month: "long",
   });
 }
+
+export function idNavigator(id: string) {
+  document.getElementById(id)?.scrollIntoView({
+    behavior: "smooth",
+  });
+}
