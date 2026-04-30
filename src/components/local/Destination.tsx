@@ -55,6 +55,14 @@ export function Destination() {
     return false;
   }, [filter]);
 
+  const isOpenFiltered = useMemo(() => {
+    if (openFilter.search) return true;
+    if (openFilter.tripDurations.length) return true;
+    if (openFilter.priceRange.min) return true; // max is not required
+    if (openFilter.priceRange.min !== 0) return true;
+    return false;
+  }, [openFilter]);
+
   const filteredDestinations = useMemo(() => {
     let initialDestinations = destinations;
     if (filter.search) {
@@ -176,7 +184,7 @@ export function Destination() {
               <AlertDialogDescription className="flex flex-col gap-4">
                 {/* Duration Filter */}
                 <p className="font-semibold">Durasi</p>
-                <div className="grid grid-cols-2">
+                <div className="grid grid-flow-col grid-rows-3">
                   {getTripDurations().map((duration) => (
                     <div className="flex gap-2 m-2" key={duration}>
                       <Checkbox
@@ -199,6 +207,7 @@ export function Destination() {
                           }
                         }}
                       />
+
                       <Label htmlFor={`filter-duration-${duration}`}>
                         {tripDurationToContext(duration)}
                       </Label>
@@ -250,9 +259,11 @@ export function Destination() {
                 <AlertDialogCancel size={"default"} variant={"outline"}>
                   Batal
                 </AlertDialogCancel>
-                <Button onClick={resetFilter} variant={"destructive"}>
-                  <FunnelX /> Reset
-                </Button>
+                {isOpenFiltered && (
+                  <Button onClick={resetFilter} variant={"destructive"}>
+                    <FunnelX /> Reset
+                  </Button>
+                )}
                 <AlertDialogAction
                   onClick={applyOpenFilter}
                   size={"default"}
