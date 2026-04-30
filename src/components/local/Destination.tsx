@@ -1,10 +1,11 @@
-import { FunnelX } from "lucide-react";
+import { ChevronLeft, ChevronRight, FunnelX } from "lucide-react";
 import { destinations } from "../../arrays/destinations";
 import { Button } from "../ui/button";
 import { DestinationCard } from "./Destination-Card";
 import { Input } from "../ui/input";
 import { useMemo, useState } from "react";
 import { DestinationFilter } from "./Destination-Filter";
+import { AnimatePresence, motion } from "framer-motion";
 
 export interface FilterDestination {
   search: string;
@@ -28,6 +29,11 @@ export function Destination() {
   });
 
   const [openFilter, setOpenFilter] = useState<FilterDestination>(filter);
+
+  const isMobile = window.innerWidth < 1024;
+  const ITEMS_PER_PAGE = isMobile ? 4 : 6;
+
+  const [page, setPage] = useState(1);
 
   const isFiltered = useMemo(() => {
     if (filter.search) return true;
@@ -88,6 +94,8 @@ export function Destination() {
     }
 
     return initialDestinations;
+
+    setPage(1);
   }, [filter]);
 
   function resetFilter() {
@@ -110,6 +118,11 @@ export function Destination() {
       search: filter.search,
     });
   }
+
+  const paginatedDestinations = useMemo(() => {
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    return filteredDestinations.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredDestinations, page]);
 
   return (
     <section
@@ -163,17 +176,53 @@ export function Destination() {
       </div>
 
       {/* Grid */}
-      <div
-        className="
-          grid
-          grid-cols-2
-          lg:grid-cols-3
-          gap-4 md:gap-8
-        "
-      >
-        {[...filteredDestinations].map((destination) => (
-          <DestinationCard key={destination.id} {...destination} />
-        ))}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={page}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{
+            duration: 0.3,
+          }}
+          className="
+      grid
+      grid-cols-2
+      lg:grid-cols-3
+      gap-4 md:gap-8
+    "
+        >
+          {paginatedDestinations.map((destination) => (
+            <motion.div
+              key={destination.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.2,
+              }}
+            >
+              <DestinationCard {...destination} />
+            </motion.div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="flex justify-center gap-4 mt-8">
+        <Button
+          disabled={page === 1}
+          onClick={() => setPage((p) => p - 1)}
+          variant={"outline"}
+        >
+          <ChevronLeft />
+        </Button>
+
+        <Button
+          disabled={page * ITEMS_PER_PAGE >= filteredDestinations.length}
+          onClick={() => setPage((p) => p + 1)}
+          variant={"outline"}
+        >
+          <ChevronRight />
+        </Button>
       </div>
     </section>
   );
