@@ -1,5 +1,19 @@
+import { Funnel } from "lucide-react";
 import { destinations } from "../../arrays/destinations";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import { Button } from "../ui/button";
 import { DestinationCard } from "./Destination-Card";
+import { Input } from "../ui/input";
 
 export function Destination() {
   return (
@@ -25,6 +39,35 @@ export function Destination() {
         </div>
 
         {/* Filters */}
+        <div className="flex gap-2">
+          <Input placeholder="Cari destinasi" />
+
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant={"secondary"}>
+                <Funnel />
+                Filter
+              </Button>
+            </AlertDialogTrigger>
+
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Filter</AlertDialogTitle>
+              </AlertDialogHeader>
+              <AlertDialogDescription>
+                <div>Something to be put here</div>
+              </AlertDialogDescription>
+              <AlertDialogFooter>
+                <AlertDialogCancel size={"default"} variant={"outline"}>
+                  Batal
+                </AlertDialogCancel>
+                <AlertDialogAction size={"default"} variant={"default"}>
+                  Terapkan
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
       </div>
 
       {/* Grid */}
