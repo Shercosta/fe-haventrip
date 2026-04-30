@@ -52,6 +52,8 @@ export function Destination() {
   }, [openFilter]);
 
   const filteredDestinations = useMemo(() => {
+    setPage(1);
+
     let initialDestinations = destinations;
     if (filter.search) {
       initialDestinations = initialDestinations.filter((destination) => {
@@ -94,8 +96,6 @@ export function Destination() {
     }
 
     return initialDestinations;
-
-    setPage(1);
   }, [filter]);
 
   function resetFilter() {
@@ -117,6 +117,7 @@ export function Destination() {
       ...openFilter,
       search: filter.search,
     });
+    setPage(1);
   }
 
   const paginatedDestinations = useMemo(() => {
