@@ -1,28 +1,10 @@
-import { Funnel, FunnelPlus, FunnelX } from "lucide-react";
-import {
-  destinations,
-  getTripDurations,
-  priceRanges,
-} from "../../arrays/destinations";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../ui/alert-dialog";
+import { FunnelX } from "lucide-react";
+import { destinations } from "../../arrays/destinations";
 import { Button } from "../ui/button";
 import { DestinationCard } from "./Destination-Card";
 import { Input } from "../ui/input";
-import { Checkbox } from "../ui/checkbox";
-import { tripDurationToContext } from "@/lib/common";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { useMemo, useState } from "react";
+import { DestinationFilter } from "./Destination-Filter";
 
 export interface FilterDestination {
   search: string;
@@ -123,7 +105,10 @@ export function Destination() {
   }
 
   function applyOpenFilter() {
-    setFilter(openFilter);
+    setFilter({
+      ...openFilter,
+      search: filter.search,
+    });
   }
 
   return (
@@ -167,113 +152,13 @@ export function Destination() {
             </Button>
           )}
 
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant={"secondary"}>
-                <Funnel />
-                Filter
-              </Button>
-            </AlertDialogTrigger>
-
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle onClick={() => console.log(openFilter)}>
-                  Filter
-                </AlertDialogTitle>
-              </AlertDialogHeader>
-              <AlertDialogDescription className="flex flex-col gap-4">
-                {/* Duration Filter */}
-                <p className="font-semibold">Durasi</p>
-                <div className="grid grid-flow-col grid-rows-3">
-                  {getTripDurations().map((duration) => (
-                    <div className="flex gap-2 m-2" key={duration}>
-                      <Checkbox
-                        name={tripDurationToContext(duration)}
-                        id={`filter-duration-${duration}`}
-                        checked={openFilter.tripDurations.includes(duration)}
-                        onCheckedChange={(e) => {
-                          if (e) {
-                            setOpenFilter((prev) => ({
-                              ...prev,
-                              tripDurations: [...prev.tripDurations, duration],
-                            }));
-                          } else {
-                            setOpenFilter((prev) => ({
-                              ...prev,
-                              tripDurations: prev.tripDurations.filter(
-                                (tripDuration) => tripDuration !== duration,
-                              ),
-                            }));
-                          }
-                        }}
-                      />
-
-                      <Label htmlFor={`filter-duration-${duration}`}>
-                        {tripDurationToContext(duration)}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-
-                <p className="font-semibold">Harga</p>
-                <RadioGroup
-                  className="w-fit"
-                  value={openFilter.priceRange.id.toString()}
-                  onValueChange={(value) => {
-                    const selected = priceRanges.find(
-                      (p) => p.id.toString() === value,
-                    );
-
-                    if (selected) {
-                      setOpenFilter((prev) => ({
-                        ...prev,
-                        priceRange: {
-                          id: selected.id,
-                          min: selected.min,
-                          max: selected.max || null,
-                        },
-                      }));
-                    }
-                  }}
-                >
-                  {priceRanges.map((priceRange, priceRange_idx) => (
-                    <div
-                      key={priceRange_idx}
-                      className="flex items-center gap-3"
-                    >
-                      <RadioGroupItem
-                        value={priceRange.id.toString()}
-                        id={`r${priceRange_idx}`}
-                      />
-
-                      <Label htmlFor={`r${priceRange_idx}`}>
-                        {priceRange.max
-                          ? `${priceRange.min.toLocaleString()} - ${priceRange.max.toLocaleString()}`
-                          : `> ${priceRange.min.toLocaleString()}`}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </AlertDialogDescription>
-              <AlertDialogFooter>
-                <AlertDialogCancel size={"default"} variant={"outline"}>
-                  Batal
-                </AlertDialogCancel>
-                {isOpenFiltered && (
-                  <Button onClick={resetFilter} variant={"destructive"}>
-                    <FunnelX /> Reset
-                  </Button>
-                )}
-                <AlertDialogAction
-                  onClick={applyOpenFilter}
-                  size={"default"}
-                  variant={"default"}
-                >
-                  <FunnelPlus /> Terapkan
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <DestinationFilter
+            openFilter={openFilter}
+            setOpenFilter={setOpenFilter}
+            isOpenFiltered={isOpenFiltered}
+            applyOpenFilter={applyOpenFilter}
+            resetFilter={resetFilter}
+          />
         </div>
       </div>
 
