@@ -51,7 +51,7 @@ export function DestinationCard(destination: Destination) {
       />
 
       {/* Badge */}
-      <div className="absolute top-4 left-4">
+      {/* <div className="absolute top-4 left-4">
         <div
           className="
                   backdrop-blur-md
@@ -69,7 +69,7 @@ export function DestinationCard(destination: Destination) {
         >
           ✨ Popular
         </div>
-      </div>
+      </div> */}
 
       {/* Content */}
       <div

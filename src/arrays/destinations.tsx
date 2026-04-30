@@ -125,7 +125,7 @@ export const destinations: Destination[] = [
     ],
     images: [
       {
-        url: "https://www.visitpulaupari.com/wp-content/uploads/2017/05/wisata-pulau-harapan.jpg",
+        url: "https://wisatapulauseribu.co.id/wp-content/uploads/2021/12/Menikmati-Liburan-dengan-Tenang-di-Pulau-Macan-yang-Indah.jpg",
         highlight: true,
       },
     ],
