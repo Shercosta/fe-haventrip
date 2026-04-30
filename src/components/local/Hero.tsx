@@ -65,7 +65,7 @@ export function Hero({ heroDestination }: HeroProps) {
 
             <ExpandableDate heroDestination={heroDestination} />
 
-            <div className="flex lg:hidden text-lg gap-2 items-center text-white/60">
+            <div className="flex lg:hidden text-sm gap-2 items-center text-white/60">
               <MapPin /> {heroDestination.location}
             </div>
             <div className="flex flex-row gap-2 justify-between items-end">
