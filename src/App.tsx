@@ -10,6 +10,7 @@ function App() {
     <section>
       <div
         id="hero"
+        className="relative overflow-hidden"
         style={{
           backgroundImage: `url(${heroDestination.images[0].url})`,
           width: "100vw",
@@ -19,10 +20,24 @@ function App() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="w-[100%] h-[90%] lg:h-[100%] p-5">
+        {/* Overlay */}
+        <div
+          className="
+      absolute inset-0
+      bg-gradient-to-t
+      from-black/50
+      via-black/10
+      to-transparent
+      z-0
+    "
+        />
+
+        {/* Content */}
+        <div className="relative z-10 w-[100%] h-[90%] lg:h-[100%] p-5">
           <div className="w-full h-full border-4 border-white/30 rounded-[35px] py-8 px-10 flex flex-col">
             {/* navbar */}
             <Navbar />
+
             {/* content */}
             <Hero heroDestination={heroDestination} />
           </div>
