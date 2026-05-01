@@ -20,7 +20,31 @@ export interface Destination {
   location: string;
   trip_duration: number; // in days
   next_available_dates: string[];
+  facilities_included: string[];
+  facilities_excluded: string[];
 }
+
+const dfi = [
+  "Kapal Feri PP Pelabuhan Kaliadem – Pulau Harapan",
+  "Asuransi penyebrangan",
+  "Homestay AC",
+  "Makan 3x",
+  "Barbeque",
+  "Air mineral",
+  "Kapal penjelajah pulau",
+  "Alat Snorkeling",
+  "Pelampung",
+  "Asuransi",
+  "Dokumentasi underwater",
+  "Tour Guide",
+  "P3K",
+];
+
+const dfe = [
+  "Tiket Penangkaran Penyu",
+  "Kebutuhan dan obat-obatan pribadi",
+  "Tip guide dan crew",
+];
 
 export const destinations: Destination[] = [
   {
@@ -44,6 +68,8 @@ export const destinations: Destination[] = [
     location: "Kepulauan Seribu",
     trip_duration: 1,
     next_available_dates: ["2026-06-06", "2026-06-07", "2026-06-08"],
+    facilities_included: dfi,
+    facilities_excluded: dfe,
   },
 
   {
@@ -67,6 +93,8 @@ export const destinations: Destination[] = [
     location: "Kepulauan Seribu",
     trip_duration: 1.5,
     next_available_dates: ["2026-06-10", "2026-06-14", "2026-06-21"],
+    facilities_included: dfi,
+    facilities_excluded: dfe,
   },
 
   {
@@ -90,6 +118,8 @@ export const destinations: Destination[] = [
     location: "Kepulauan Seribu",
     trip_duration: 3,
     next_available_dates: ["2026-06-12", "2026-06-19", "2026-06-26"],
+    facilities_included: dfi,
+    facilities_excluded: dfe,
   },
 
   {
@@ -113,6 +143,8 @@ export const destinations: Destination[] = [
     location: "Kepulauan Seribu",
     trip_duration: 2,
     next_available_dates: ["2026-06-15", "2026-06-22", "2026-06-29"],
+    facilities_included: dfi,
+    facilities_excluded: dfe,
   },
 
   {
@@ -136,6 +168,8 @@ export const destinations: Destination[] = [
     location: "Kepulauan Seribu",
     trip_duration: 4,
     next_available_dates: ["2026-07-01", "2026-07-08", "2026-07-15"],
+    facilities_included: dfi,
+    facilities_excluded: dfe,
   },
 
   {
@@ -159,6 +193,8 @@ export const destinations: Destination[] = [
     location: "Kepulauan Seribu",
     trip_duration: 5,
     next_available_dates: ["2026-07-03", "2026-07-10", "2026-07-17"],
+    facilities_included: dfi,
+    facilities_excluded: dfe,
   },
 
   // {
@@ -182,6 +218,8 @@ export const destinations: Destination[] = [
   //   location: "Kepulauan Seribu",
   //   trip_duration: 1,
   //   next_available_dates: ["2026-06-06", "2026-06-07", "2026-06-08"],
+  // facilities_included: dfi,
+  // facilities_excluded: dfe,
   // },
 
   // {
@@ -205,6 +243,8 @@ export const destinations: Destination[] = [
   //   location: "Kepulauan Seribu",
   //   trip_duration: 1.5,
   //   next_available_dates: ["2026-06-10", "2026-06-14", "2026-06-21"],
+  // facilities_included: dfi,
+  // facilities_excluded: dfe,
   // },
 
   // {
@@ -228,6 +268,8 @@ export const destinations: Destination[] = [
   //   location: "Kepulauan Seribu",
   //   trip_duration: 3,
   //   next_available_dates: ["2026-06-12", "2026-06-19", "2026-06-26"],
+  // facilities_included: dfi,
+  // facilities_excluded: dfe,
   // },
 
   // {
@@ -251,6 +293,8 @@ export const destinations: Destination[] = [
   //   location: "Kepulauan Seribu",
   //   trip_duration: 2,
   //   next_available_dates: ["2026-06-15", "2026-06-22", "2026-06-29"],
+  // facilities_included: dfi,
+  // facilities_excluded: dfe,
   // },
 
   // {
@@ -274,6 +318,8 @@ export const destinations: Destination[] = [
   //   location: "Kepulauan Seribu",
   //   trip_duration: 4,
   //   next_available_dates: ["2026-07-01", "2026-07-08", "2026-07-15"],
+  // facilities_included: dfi,
+  // facilities_excluded: dfe,
   // },
 
   // {
@@ -297,6 +343,8 @@ export const destinations: Destination[] = [
   //   location: "Kepulauan Seribu",
   //   trip_duration: 5,
   //   next_available_dates: ["2026-07-03", "2026-07-10", "2026-07-17"],
+  // facilities_included: dfi,
+  // facilities_excluded: dfe,
   // },
 ];
 
