@@ -376,3 +376,8 @@ export const priceRanges = [
     min: 500_000,
   },
 ];
+
+export function getDestinationById(id: number) {
+  const destination = destinations.find((destination) => destination.id === id);
+  return destination;
+}
