@@ -11,7 +11,7 @@ export interface HeroProps {
 
 export function Hero({ heroDestination }: HeroProps) {
   return (
-    <div className="flex flex-col flex-1">
+    <div id="hero" className="flex flex-col flex-1">
       {heroDestination.catchphrases ? (
         heroDestination.catchphrases.map((catchphrase, catchphrase_idx) => (
           <span

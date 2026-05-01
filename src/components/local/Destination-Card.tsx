@@ -1,6 +1,10 @@
 import { CircleChevronRight } from "lucide-react";
 import type { Destination } from "../../arrays/destinations";
-import { defaultDateShow, tripDurationToContext } from "../../lib/common";
+import {
+  defaultDateShow,
+  idNavigator,
+  tripDurationToContext,
+} from "../../lib/common";
 import { useHero } from "@/context/HeroContext";
 
 export function DestinationCard(destination: Destination) {
@@ -22,7 +26,10 @@ export function DestinationCard(destination: Destination) {
 
               shadow-[0_20px_60px_rgba(0,0,0,0.12)]
             "
-      onClick={() => setHero(destination)}
+      onClick={() => {
+        setHero(destination);
+        idNavigator("hero");
+      }}
     >
       {/* Background Image */}
       <img
