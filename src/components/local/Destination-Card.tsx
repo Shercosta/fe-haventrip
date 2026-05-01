@@ -4,11 +4,13 @@ import {
   defaultDateShow,
   idNavigator,
   tripDurationToContext,
+  useNavigateAndScroll,
 } from "../../lib/common";
 import { useHero } from "@/context/HeroContext";
 
 export function DestinationCard(destination: Destination) {
   const { setHero } = useHero();
+  const naviscroll = useNavigateAndScroll();
 
   return (
     <div
@@ -135,6 +137,10 @@ export function DestinationCard(destination: Destination) {
                     hover:scale-105
                     transition-all
                   "
+            onClick={(e) => {
+              e.stopPropagation();
+              naviscroll(`/destination/${destination.id}`);
+            }}
           >
             <CircleChevronRight />
           </button>

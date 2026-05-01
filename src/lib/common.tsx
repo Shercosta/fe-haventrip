@@ -1,4 +1,5 @@
 import { clsx } from "clsx";
+import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: any[]) {
@@ -35,4 +36,17 @@ export function idNavigator(id: string) {
   document.getElementById(id)?.scrollIntoView({
     behavior: "smooth",
   });
+}
+
+export function useNavigateAndScroll() {
+  const navigate = useNavigate();
+
+  return (path: string) => {
+    navigate(path);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 }
