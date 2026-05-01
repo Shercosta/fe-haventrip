@@ -48,7 +48,7 @@ export function ExpandableDate({ heroDestination }: HeroProps) {
             mt-3
             z-50
 
-            w-[230px]
+            w-[250px]
 
             rounded-2xl
             border border-white/10
