@@ -79,7 +79,7 @@ export const destinations: Destination[] = [
     ],
     images: [
       {
-        url: "https://fantastrip.id/wp-content/uploads/background-odt-pramuka-1.png",
+        url: "https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2024/11/14/183416ac-d6e6-4235-8225-79c9ba77cc22-1731562692774-1a98bca823ab1f3b15019d3ca9610c11.jpg",
         highlight: true,
       },
     ],
