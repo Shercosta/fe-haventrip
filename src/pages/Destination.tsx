@@ -1,4 +1,6 @@
 import { getDestinationById } from "@/arrays/destinations";
+import { Button } from "@/components/ui/button";
+import { tripDurationToContext } from "@/lib/common";
 import { Link, useParams } from "react-router-dom";
 
 export function DestinationPage() {
@@ -93,7 +95,7 @@ export function DestinationPage() {
 
             <div className="flex flex-wrap gap-3 mb-6">
               <div className="bg-white/15 backdrop-blur-md px-5 py-2 rounded-full">
-                {destination.trip_duration} Days
+                {tripDurationToContext(destination.trip_duration)}
               </div>
 
               <div className="bg-white/15 backdrop-blur-md px-5 py-2 rounded-full">
@@ -126,11 +128,11 @@ export function DestinationPage() {
           "
         >
           {[
-            ["overview", "Overview"],
-            ["gallery", "Gallery"],
-            ["included", "Included"],
-            ["excluded", "Excluded"],
-            ["dates", "Dates"],
+            ["overview", "Sekilas"],
+            ["gallery", "Galeri"],
+            ["included", "Fasilitas Included"],
+            ["excluded", "Fasilitas Excluded"],
+            ["dates", "Tanggal Tersedia"],
           ].map(([id, label]) => (
             <a
               key={id}
@@ -163,7 +165,7 @@ export function DestinationPage() {
               className="bg-white rounded-3xl p-8 shadow-sm"
             >
               <h2 className="text-3xl font-bold mb-5 text-slate-900">
-                Overview
+                Sekilas
               </h2>
 
               <p className="text-slate-700 leading-relaxed text-lg">
@@ -173,9 +175,7 @@ export function DestinationPage() {
 
             {/* gallery */}
             <section id="gallery">
-              <h2 className="text-3xl font-bold text-slate-900 mb-5">
-                Gallery
-              </h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-5">Galeri</h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {destination.images.map((image, index) => (
@@ -204,7 +204,7 @@ export function DestinationPage() {
               className="bg-white rounded-3xl p-8 shadow-sm"
             >
               <h2 className="text-2xl font-bold mb-5 text-slate-900">
-                What's Included
+                Fasilitas Included
               </h2>
 
               <div className="grid sm:grid-cols-2 gap-3">
@@ -225,7 +225,7 @@ export function DestinationPage() {
               className="bg-white rounded-3xl p-8 shadow-sm"
             >
               <h2 className="text-2xl font-bold mb-5 text-slate-900">
-                Not Included
+                Fasilitas Excluded
               </h2>
 
               <div className="grid sm:grid-cols-2 gap-3">
@@ -246,7 +246,7 @@ export function DestinationPage() {
             {/* booking card */}
             <div className="bg-white rounded-3xl p-8 shadow-lg sticky top-6">
               <div className="mb-6">
-                <p className="text-slate-500 mb-1">Starting from</p>
+                <p className="text-slate-500 mb-1">Mulai Dari</p>
 
                 <h3 className="text-4xl font-black text-slate-900">
                   Rp {destination.price.toLocaleString("id-ID")}
@@ -255,23 +255,22 @@ export function DestinationPage() {
 
               <div className="space-y-4 mb-8">
                 <div>
-                  <p className="text-slate-500 text-sm">Location</p>
+                  <p className="text-slate-500 text-sm">Lokasi</p>
                   <p className="font-semibold">{destination.location}</p>
                 </div>
 
                 <div>
-                  <p className="text-slate-500 text-sm">Duration</p>
+                  <p className="text-slate-500 text-sm">Durasi</p>
                   <p className="font-semibold">
-                    {destination.trip_duration} Days
+                    {tripDurationToContext(destination.trip_duration)}
                   </p>
                 </div>
               </div>
 
-              <button
+              <Button
                 className="
                   w-full
                   bg-sky-500
-                  hover:bg-sky-600
                   transition-colors
                   text-white
                   py-4
@@ -280,13 +279,13 @@ export function DestinationPage() {
                   text-lg
                 "
               >
-                Book Now
-              </button>
+                Pesan Sekarang
+              </Button>
             </div>
 
             {/* dates */}
             <section id="dates" className="bg-white rounded-3xl p-8 shadow-sm">
-              <h3 className="text-2xl font-bold mb-5">Next Available Dates</h3>
+              <h3 className="text-2xl font-bold mb-5">Tanggal Tersedia</h3>
 
               <div className="space-y-3">
                 {destination.next_available_dates.map((date, index) => (
@@ -300,7 +299,12 @@ export function DestinationPage() {
                       transition-colors
                     "
                   >
-                    {date}
+                    {new Date(date).toLocaleDateString("id-ID", {
+                      weekday: "long",
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
                   </div>
                 ))}
               </div>
