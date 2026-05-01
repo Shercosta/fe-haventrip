@@ -33,6 +33,7 @@ export function Navbar() {
           <Button
             variant={"none"}
             className="text-white/80 font-normal hover:text-white"
+            onClick={() => idNavigator("footer")}
           >
             Kontak
           </Button>

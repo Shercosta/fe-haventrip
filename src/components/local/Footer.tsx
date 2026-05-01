@@ -3,6 +3,7 @@ import { HavenTripText } from "./Haventrip-Text";
 export function Footer() {
   return (
     <footer
+      id="footer"
       className="
         relative overflow-hidden
         bg-gradient-to-b
@@ -46,7 +47,7 @@ export function Footer() {
 
         {/* Brand */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-          <HavenTripText classNameBoth="text-5xl sm:text-7xl lg:text-[10rem] leading-none tracking-tight font-black text-sky-950" />
+          <HavenTripText classNameBoth="text-5xl sm:text-7xl lg:text-[10rem] leading-none tracking-tight font-black" />
 
           <p
             className="
@@ -80,18 +81,32 @@ export function Footer() {
       >
         <div>© {new Date().getFullYear()} Shercosta. All rights reserved.</div>
 
-        <a
-          href="https://instagram.com/haventripid"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="
+        <div className="flex gap-3">
+          <a
+            href="mailto:haventripid@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
             transition-all duration-300
             hover:text-sky-950
             hover:-translate-y-0.5
           "
-        >
-          Instagram ↗
-        </a>
+          >
+            haventripid@gmail.com ↗
+          </a>
+          <a
+            href="https://instagram.com/haventripid"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+            transition-all duration-300
+            hover:text-sky-950
+            hover:-translate-y-0.5
+          "
+          >
+            Instagram ↗
+          </a>
+        </div>
       </div>
     </footer>
   );
