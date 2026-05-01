@@ -138,14 +138,13 @@ export function DestinationPage() {
           {[
             ["overview", "Sekilas"],
             ["gallery", "Galeri"],
-            ["itinerary", "Itinerary"],
             ["included", "Fasilitas Included"],
             ["excluded", "Fasilitas Excluded"],
+            ["itinerary", "Itinerary"],
             ["dates", "Tanggal Tersedia"],
           ].map(([id, label]) => (
-            <a
+            <Button
               key={id}
-              href={`#${id}`}
               className="
                 whitespace-nowrap
                 px-5 py-2
@@ -156,9 +155,13 @@ export function DestinationPage() {
                 transition-all duration-300
                 text-sm font-medium
               "
+              variant={"ghost"}
+              onClick={() => {
+                idNavigator(id);
+              }}
             >
               {label}
-            </a>
+            </Button>
           ))}
         </div>
       </div>
@@ -245,9 +248,6 @@ export function DestinationPage() {
               </div>
             </section>
 
-            {/* itinerary */}
-            <ItinerarySection itineraries={destination.itineraries} />
-
             {/* included */}
             <section
               id="included"
@@ -289,6 +289,9 @@ export function DestinationPage() {
                 ))}
               </div>
             </section>
+
+            {/* itinerary */}
+            <ItinerarySection itineraries={destination.itineraries} />
           </div>
 
           {/* RIGHT */}
