@@ -9,6 +9,16 @@ interface Catchphrase_Destination {
   opacity?: number;
 }
 
+export interface Itinerary_Time_Destination {
+  time: string;
+  label: string;
+}
+
+export interface Itinerary_Day_Destination {
+  day: number;
+  times: Itinerary_Time_Destination[];
+}
+
 export interface Destination {
   id: number;
   name: string;
@@ -22,6 +32,7 @@ export interface Destination {
   next_available_dates: string[];
   facilities_included: string[];
   facilities_excluded: string[];
+  itineraries: Itinerary_Day_Destination[];
 }
 
 const dfi = [
@@ -44,6 +55,43 @@ const dfe = [
   "Tiket Penangkaran Penyu",
   "Kebutuhan dan obat-obatan pribadi",
   "Tip guide dan crew",
+];
+
+const di: Itinerary_Day_Destination[] = [
+  {
+    day: 1,
+    times: [
+      {
+        time: "07.00",
+        label: "Penjelajah Pulau",
+      },
+      {
+        time: "12.00",
+        label: "Makan Siang",
+      },
+      {
+        time: "14.00",
+        label: "Snorkeling",
+      },
+    ],
+  },
+  {
+    day: 2,
+    times: [
+      {
+        time: "08.00",
+        label: "Penangkaran Penyu",
+      },
+      {
+        time: "13.00",
+        label: "Coffee Break",
+      },
+      {
+        time: "15.00",
+        label: "Island Hopping",
+      },
+    ],
+  },
 ];
 
 export const destinations: Destination[] = [
@@ -70,6 +118,7 @@ export const destinations: Destination[] = [
     next_available_dates: ["2026-06-06", "2026-06-07", "2026-06-08"],
     facilities_included: dfi,
     facilities_excluded: dfe,
+    itineraries: di,
   },
 
   {
@@ -119,6 +168,7 @@ export const destinations: Destination[] = [
     next_available_dates: ["2026-06-10", "2026-06-14", "2026-06-21"],
     facilities_included: dfi,
     facilities_excluded: dfe,
+    itineraries: di,
   },
 
   {
@@ -144,6 +194,7 @@ export const destinations: Destination[] = [
     next_available_dates: ["2026-06-12", "2026-06-19", "2026-06-26"],
     facilities_included: dfi,
     facilities_excluded: dfe,
+    itineraries: di,
   },
 
   {
@@ -169,6 +220,7 @@ export const destinations: Destination[] = [
     next_available_dates: ["2026-06-15", "2026-06-22", "2026-06-29"],
     facilities_included: dfi,
     facilities_excluded: dfe,
+    itineraries: di,
   },
 
   {
@@ -194,6 +246,7 @@ export const destinations: Destination[] = [
     next_available_dates: ["2026-07-01", "2026-07-08", "2026-07-15"],
     facilities_included: dfi,
     facilities_excluded: dfe,
+    itineraries: di,
   },
 
   {
@@ -219,6 +272,7 @@ export const destinations: Destination[] = [
     next_available_dates: ["2026-07-03", "2026-07-10", "2026-07-17"],
     facilities_included: dfi,
     facilities_excluded: dfe,
+    itineraries: di,
   },
 
   // {
@@ -244,6 +298,7 @@ export const destinations: Destination[] = [
   //   next_available_dates: ["2026-06-06", "2026-06-07", "2026-06-08"],
   // facilities_included: dfi,
   // facilities_excluded: dfe,
+  // itineraries: di
   // },
 
   // {
@@ -269,6 +324,7 @@ export const destinations: Destination[] = [
   //   next_available_dates: ["2026-06-10", "2026-06-14", "2026-06-21"],
   // facilities_included: dfi,
   // facilities_excluded: dfe,
+  // itineraries: di
   // },
 
   // {
@@ -294,6 +350,7 @@ export const destinations: Destination[] = [
   //   next_available_dates: ["2026-06-12", "2026-06-19", "2026-06-26"],
   // facilities_included: dfi,
   // facilities_excluded: dfe,
+  // itineraries: di
   // },
 
   // {
@@ -319,6 +376,7 @@ export const destinations: Destination[] = [
   //   next_available_dates: ["2026-06-15", "2026-06-22", "2026-06-29"],
   // facilities_included: dfi,
   // facilities_excluded: dfe,
+  // itineraries: di
   // },
 
   // {
@@ -344,6 +402,7 @@ export const destinations: Destination[] = [
   //   next_available_dates: ["2026-07-01", "2026-07-08", "2026-07-15"],
   // facilities_included: dfi,
   // facilities_excluded: dfe,
+  // itineraries: di
   // },
 
   // {
@@ -369,6 +428,7 @@ export const destinations: Destination[] = [
   //   next_available_dates: ["2026-07-03", "2026-07-10", "2026-07-17"],
   // facilities_included: dfi,
   // facilities_excluded: dfe,
+  // itineraries: di
   // },
 ];
 

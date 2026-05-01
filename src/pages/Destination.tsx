@@ -1,4 +1,5 @@
 import { getDestinationById } from "@/arrays/destinations";
+import ItinerarySection from "@/components/local/Itineraries";
 import { Button } from "@/components/ui/button";
 import { idNavigator, tripDurationToContext } from "@/lib/common";
 import { useState } from "react";
@@ -137,6 +138,7 @@ export function DestinationPage() {
           {[
             ["overview", "Sekilas"],
             ["gallery", "Galeri"],
+            ["itinerary", "Itinerary"],
             ["included", "Fasilitas Included"],
             ["excluded", "Fasilitas Excluded"],
             ["dates", "Tanggal Tersedia"],
@@ -242,6 +244,9 @@ export function DestinationPage() {
                 )}
               </div>
             </section>
+
+            {/* itinerary */}
+            <ItinerarySection itineraries={destination.itineraries} />
 
             {/* included */}
             <section
