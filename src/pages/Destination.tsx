@@ -1,5 +1,5 @@
 import { getDestinationById } from "@/arrays/destinations";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export function DestinationPage() {
   const { id } = useParams();
@@ -18,49 +18,161 @@ export function DestinationPage() {
     <div className="bg-slate-50 min-h-screen">
       {/* HERO */}
       <section
-        className="relative h-[70vh] w-full bg-cover bg-center"
+        className="relative h-[75vh] w-full bg-cover bg-center"
         style={{
           backgroundImage: `url(${destination.images[0]?.url})`,
         }}
       >
         {/* overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
 
-        {/* content */}
-        <div className="relative z-10 h-full flex flex-col justify-end px-6 lg:px-20 py-12 text-white">
-          <div className="max-w-4xl">
-            <p className="uppercase tracking-[0.3em] text-sm text-white/70 mb-3">
+        {/* TOP NAVIGATION */}
+        <div className="absolute top-0 left-0 w-full z-20 px-6 lg:px-10 py-6">
+          <div className="flex flex-col gap-4">
+            {/* back button */}
+            <Link
+              to="/"
+              className="
+                w-fit
+                flex items-center gap-2
+                px-5 py-3
+                rounded-full
+                bg-white/10
+                backdrop-blur-md
+                border border-white/20
+                text-white
+                hover:bg-white/20
+                transition-all duration-300
+              "
+            >
+              ← Back
+            </Link>
+
+            {/* breadcrumb */}
+            <div
+              className="
+                w-fit
+                px-5 py-3
+                rounded-full
+                bg-white/10
+                backdrop-blur-md
+                border border-white/20
+                text-white/90
+                text-sm
+                flex items-center gap-2
+                flex-wrap
+              "
+            >
+              <Link to="/" className="hover:text-white transition-colors">
+                Home
+              </Link>
+
+              <span className="text-white/50">/</span>
+
+              <span className="text-white/70">Destinations</span>
+
+              <span className="text-white/50">/</span>
+
+              <span className="font-semibold text-white">
+                {destination.name}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* HERO CONTENT */}
+        <div className="relative z-10 h-full flex items-end px-6 lg:px-20 py-14">
+          <div className="max-w-4xl text-white">
+            <p className="uppercase tracking-[0.3em] text-sm text-white/70 mb-4">
               {destination.location}
             </p>
 
-            <h1 className="text-5xl lg:text-7xl font-black mb-4">
+            <h1 className="text-5xl lg:text-7xl font-black mb-5">
               {destination.name}
             </h1>
 
             <div className="flex flex-wrap gap-3 mb-6">
-              <div className="bg-white/15 backdrop-blur-md px-4 py-2 rounded-full">
+              <div className="bg-white/15 backdrop-blur-md px-5 py-2 rounded-full">
                 {destination.trip_duration} Days
               </div>
 
-              <div className="bg-white/15 backdrop-blur-md px-4 py-2 rounded-full">
+              <div className="bg-white/15 backdrop-blur-md px-5 py-2 rounded-full">
                 Rp {destination.price.toLocaleString("id-ID")}
               </div>
             </div>
 
-            <p className="max-w-2xl text-white/85 text-lg leading-relaxed">
+            <p className="max-w-2xl text-lg text-white/85 leading-relaxed">
               {destination.description}
             </p>
           </div>
         </div>
       </section>
 
+      {/* STICKY SECTION NAV */}
+      <div
+        className="
+          sticky top-0 z-30
+          backdrop-blur-xl
+          bg-white/80
+          border-b border-slate-200
+        "
+      >
+        <div
+          className="
+            max-w-7xl mx-auto
+            px-4 lg:px-10
+            py-4
+            flex gap-3 overflow-x-auto
+          "
+        >
+          {[
+            ["overview", "Overview"],
+            ["gallery", "Gallery"],
+            ["included", "Included"],
+            ["excluded", "Excluded"],
+            ["dates", "Dates"],
+          ].map(([id, label]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className="
+                whitespace-nowrap
+                px-5 py-2
+                rounded-full
+                bg-slate-100
+                hover:bg-sky-100
+                hover:text-sky-700
+                transition-all duration-300
+                text-sm font-medium
+              "
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+      </div>
+
       {/* CONTENT */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* LEFT */}
           <div className="lg:col-span-2 space-y-10">
-            {/* Gallery */}
-            <div>
+            {/* overview */}
+            <section
+              id="overview"
+              className="bg-white rounded-3xl p-8 shadow-sm"
+            >
+              <h2 className="text-3xl font-bold mb-5 text-slate-900">
+                Overview
+              </h2>
+
+              <p className="text-slate-700 leading-relaxed text-lg">
+                {destination.description}
+              </p>
+            </section>
+
+            {/* gallery */}
+            <section id="gallery">
               <h2 className="text-3xl font-bold text-slate-900 mb-5">
                 Gallery
               </h2>
@@ -84,10 +196,13 @@ export function DestinationPage() {
                   />
                 ))}
               </div>
-            </div>
+            </section>
 
-            {/* Included */}
-            <div className="bg-white rounded-3xl p-8 shadow-sm">
+            {/* included */}
+            <section
+              id="included"
+              className="bg-white rounded-3xl p-8 shadow-sm"
+            >
               <h2 className="text-2xl font-bold mb-5 text-slate-900">
                 What's Included
               </h2>
@@ -102,10 +217,13 @@ export function DestinationPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
 
-            {/* Excluded */}
-            <div className="bg-white rounded-3xl p-8 shadow-sm">
+            {/* excluded */}
+            <section
+              id="excluded"
+              className="bg-white rounded-3xl p-8 shadow-sm"
+            >
               <h2 className="text-2xl font-bold mb-5 text-slate-900">
                 Not Included
               </h2>
@@ -120,12 +238,12 @@ export function DestinationPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
           </div>
 
-          {/* RIGHT SIDEBAR */}
+          {/* RIGHT */}
           <div className="space-y-6">
-            {/* Booking card */}
+            {/* booking card */}
             <div className="bg-white rounded-3xl p-8 shadow-lg sticky top-6">
               <div className="mb-6">
                 <p className="text-slate-500 mb-1">Starting from</p>
@@ -166,8 +284,8 @@ export function DestinationPage() {
               </button>
             </div>
 
-            {/* Available dates */}
-            <div className="bg-white rounded-3xl p-8 shadow-sm">
+            {/* dates */}
+            <section id="dates" className="bg-white rounded-3xl p-8 shadow-sm">
               <h3 className="text-2xl font-bold mb-5">Next Available Dates</h3>
 
               <div className="space-y-3">
@@ -186,7 +304,7 @@ export function DestinationPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </section>
