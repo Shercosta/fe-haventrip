@@ -1,14 +1,11 @@
-import { useState } from "react";
 import "./App.css";
 import { Navbar } from "./components/local/Navbar";
-import { destinations } from "./arrays/destinations";
 import { Hero } from "./components/local/Hero";
 import { Destination } from "./components/local/Destination";
+import { useHero } from "./context/HeroContext";
 
 function App() {
-  const [heroDestination] = useState(
-    destinations.filter((destination) => destination.isHero)[0],
-  );
+  const { hero: heroDestination } = useHero();
   return (
     <section>
       <div

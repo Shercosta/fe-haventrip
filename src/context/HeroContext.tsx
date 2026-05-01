@@ -1,5 +1,5 @@
 import { destinations, type Destination } from "@/arrays/destinations";
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 type HeroContextType = {
   hero: Destination;
@@ -20,7 +20,7 @@ export function HeroProvider({ children }: { children: ReactNode }) {
 }
 
 export function useHero() {
-  const context = HeroContext;
+  const context = useContext(HeroContext);
   if (context === null) {
     throw new Error("useHero must be used within a HeroProvider");
   }
