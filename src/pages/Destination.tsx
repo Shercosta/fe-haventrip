@@ -1,6 +1,7 @@
 import { getDestinationById } from "@/arrays/destinations";
 import { Button } from "@/components/ui/button";
-import { tripDurationToContext } from "@/lib/common";
+import { idNavigator, tripDurationToContext } from "@/lib/common";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export function DestinationPage() {
@@ -15,6 +16,12 @@ export function DestinationPage() {
       </div>
     );
   }
+
+  const [showAllImages, setShowAllImages] = useState(false);
+
+  const displayedImages = showAllImages
+    ? destination.images
+    : destination.images.slice(0, 1);
 
   return (
     <div className="bg-slate-50 min-h-screen">
@@ -177,24 +184,62 @@ export function DestinationPage() {
             <section id="gallery">
               <h2 className="text-3xl font-bold text-slate-900 mb-5">Galeri</h2>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {destination.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image.url}
-                    alt={`${destination.name} ${index}`}
-                    className={`
-                      rounded-3xl
-                      object-cover
-                      w-full
-                      h-72
-                      shadow-lg
-                      hover:scale-[1.02]
-                      transition-all duration-300
-                      ${image.highlight ? "sm:col-span-2 h-[28rem]" : ""}
-                    `}
-                  />
-                ))}
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {displayedImages.map((image, index) => (
+                    <div
+                      key={index}
+                      className={`
+          relative overflow-hidden rounded-3xl
+          ${image.highlight ? "sm:col-span-2" : ""}
+        `}
+                    >
+                      <img
+                        src={image.url}
+                        alt={`${destination.name} ${index}`}
+                        className={`
+            object-cover
+            w-full
+            h-72
+            shadow-lg
+            hover:scale-105
+            transition-all duration-500
+            ${image.highlight ? "h-[28rem]" : ""}
+          `}
+                      />
+
+                      {/* dark overlay on hover */}
+                      <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-all duration-300" />
+                    </div>
+                  ))}
+                </div>
+
+                {/* expand button */}
+                {destination.images.length > 3 && (
+                  <div className="flex justify-center">
+                    <button
+                      onClick={() => {
+                        setShowAllImages(!showAllImages);
+                        idNavigator("gallery");
+                      }}
+                      className="
+          px-6 py-3
+          rounded-full
+          bg-sky-500
+          hover:bg-sky-600
+          text-white
+          font-semibold
+          transition-all duration-300
+          hover:scale-105
+          shadow-lg
+        "
+                    >
+                      {showAllImages
+                        ? "Tutup Galeri"
+                        : `Lihat Semua Foto (${destination.images.length})`}
+                    </button>
+                  </div>
+                )}
               </div>
             </section>
 

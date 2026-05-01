@@ -97,6 +97,18 @@ export const destinations: Destination[] = [
         url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-tidung.webp",
         highlight: false,
       },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-tidung.webp",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-tidung.webp",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-tidung.webp",
+        highlight: false,
+      },
     ],
     isHero: false,
     description:
