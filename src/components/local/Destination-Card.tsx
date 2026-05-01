@@ -1,10 +1,6 @@
 import { CircleChevronRight } from "lucide-react";
 import type { Destination } from "../../arrays/destinations";
-import {
-  defaultDateShow,
-  ellipseText,
-  tripDurationToContext,
-} from "../../lib/common";
+import { defaultDateShow, tripDurationToContext } from "../../lib/common";
 
 export function DestinationCard(destination: Destination) {
   return (
@@ -90,7 +86,7 @@ export function DestinationCard(destination: Destination) {
           {destination.name}
         </h3>
 
-        <p
+        {/* <p
           className="
                   hidden md:block
                   text-white/80
@@ -100,7 +96,7 @@ export function DestinationCard(destination: Destination) {
                 "
         >
           {ellipseText(destination.description, 100)}
-        </p>
+        </p> */}
 
         <span className="text-xs lg:text-lg">
           {tripDurationToContext(destination.trip_duration)} |{" "}
