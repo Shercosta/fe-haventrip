@@ -292,6 +292,73 @@ export function DestinationPage() {
 
             {/* itinerary */}
             <ItinerarySection itineraries={destination.itineraries} />
+
+            <section className="mt-16">
+              <h2 className="text-3xl font-bold mb-8">Meeting Points</h2>
+
+              <div className="space-y-4">
+                {destination.meeting_points.map((meetingPoint, index) => (
+                  <div
+                    key={meetingPoint.name}
+                    className="
+          flex
+          items-center
+          justify-between
+          gap-4
+          border-b
+          border-border
+          pb-4
+        "
+                  >
+                    <div className="flex items-center gap-4">
+                      <div
+                        className="
+              w-8
+              h-8
+              rounded-full
+              bg-primary/10
+              text-primary
+              flex
+              items-center
+              justify-center
+              text-sm
+              font-semibold
+              shrink-0
+            "
+                      >
+                        {index + 1}
+                      </div>
+
+                      <div>
+                        <p className="font-medium">{meetingPoint.name}</p>
+
+                        {/* Future enhancement */}
+                        {/* <p className="text-sm text-muted-foreground">
+              4.2 km away
+            </p> */}
+                      </div>
+                    </div>
+
+                    {meetingPoint.google_map_url && (
+                      <a
+                        href={meetingPoint.google_map_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+              text-primary
+              text-sm
+              font-medium
+              hover:underline
+              whitespace-nowrap
+            "
+                      >
+                        Open Maps →
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
           </div>
 
           {/* RIGHT */}
