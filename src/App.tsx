@@ -3,6 +3,7 @@ import { Navbar } from "./components/local/Navbar";
 import { Hero } from "./components/local/Hero";
 import { Destination } from "./components/local/Destination";
 import { useHero } from "./context/HeroContext";
+import { Footer } from "./components/local/Footer";
 
 function App() {
   const { hero: heroDestination } = useHero();
@@ -45,6 +46,7 @@ function App() {
       </div>
 
       <Destination />
+      <Footer />
     </section>
   );
 }
