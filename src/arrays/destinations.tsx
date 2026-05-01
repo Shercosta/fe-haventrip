@@ -19,6 +19,32 @@ export interface Itinerary_Day_Destination {
   times: Itinerary_Time_Destination[];
 }
 
+export interface Meeting_Point_Destination {
+  name: string;
+  latitude: number;
+  longitude: number;
+  google_map_url?: string;
+}
+
+export const availableMeetingPoints = {
+  PlazaSemanggi: {
+    name: "Plaza Semanggi / Lippo Mall Nusantara",
+    latitude: -6.219522877119389,
+    longitude: 106.81457713868421,
+    google_map_url: "https://maps.app.goo.gl/R7Y2oWmGkzgKDUkC6",
+  },
+
+  MuaraKamal: {
+    name: "Dermaga Muara Kamal",
+    latitude: -6.0912380286810714,
+    longitude: 106.72564659265802,
+    google_map_url: "https://maps.app.goo.gl/fVbJ65k6AZCpjd3j7",
+  },
+} as const satisfies Record<string, Meeting_Point_Destination>;
+
+type AvailableMeetingPoint =
+  (typeof availableMeetingPoints)[keyof typeof availableMeetingPoints];
+
 export interface Destination {
   id: number;
   name: string;
@@ -33,6 +59,7 @@ export interface Destination {
   facilities_included: string[];
   facilities_excluded: string[];
   itineraries: Itinerary_Day_Destination[];
+  meeting_points: AvailableMeetingPoint[];
 }
 
 const dfi = [
@@ -119,6 +146,10 @@ export const destinations: Destination[] = [
     facilities_included: dfi,
     facilities_excluded: dfe,
     itineraries: di,
+    meeting_points: [
+      availableMeetingPoints.PlazaSemanggi,
+      availableMeetingPoints.MuaraKamal,
+    ],
   },
 
   {
@@ -169,6 +200,10 @@ export const destinations: Destination[] = [
     facilities_included: dfi,
     facilities_excluded: dfe,
     itineraries: di,
+    meeting_points: [
+      availableMeetingPoints.PlazaSemanggi,
+      availableMeetingPoints.MuaraKamal,
+    ],
   },
 
   {
@@ -195,6 +230,10 @@ export const destinations: Destination[] = [
     facilities_included: dfi,
     facilities_excluded: dfe,
     itineraries: di,
+    meeting_points: [
+      availableMeetingPoints.PlazaSemanggi,
+      availableMeetingPoints.MuaraKamal,
+    ],
   },
 
   {
@@ -221,6 +260,10 @@ export const destinations: Destination[] = [
     facilities_included: dfi,
     facilities_excluded: dfe,
     itineraries: di,
+    meeting_points: [
+      availableMeetingPoints.PlazaSemanggi,
+      availableMeetingPoints.MuaraKamal,
+    ],
   },
 
   {
@@ -247,6 +290,10 @@ export const destinations: Destination[] = [
     facilities_included: dfi,
     facilities_excluded: dfe,
     itineraries: di,
+    meeting_points: [
+      availableMeetingPoints.PlazaSemanggi,
+      availableMeetingPoints.MuaraKamal,
+    ],
   },
 
   {
@@ -273,163 +320,11 @@ export const destinations: Destination[] = [
     facilities_included: dfi,
     facilities_excluded: dfe,
     itineraries: di,
+    meeting_points: [
+      availableMeetingPoints.PlazaSemanggi,
+      availableMeetingPoints.MuaraKamal,
+    ],
   },
-
-  // {
-  //   id: 7,
-  //   name: "Pulau Pari",
-  //   catchphrases: [
-  //     { text: "Surga" },
-  //     { text: "Tropis", colorHex: "#FFFFFF", opacity: 0.7 },
-  //     { text: "Dekat Jakarta" },
-  //   ],
-  //   images: [
-  //     {
-  //       url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pinewood.jpg",
-  //       highlight: true,
-  //     },
-  //   ],
-  //   isHero: true,
-  //   description:
-  //     "Nikmati pasir putih, laut sebening kristal, dan suasana pulau yang tenang di Pulau Pari. Tempat sempurna untuk healing, snorkeling, dan menikmati sunset romantis hanya beberapa jam dari Jakarta.",
-  //   price: 180_000,
-  //   location: "Kepulauan Seribu",
-  //   trip_duration: 1,
-  //   next_available_dates: ["2026-06-06", "2026-06-07", "2026-06-08"],
-  // facilities_included: dfi,
-  // facilities_excluded: dfe,
-  // itineraries: di
-  // },
-
-  // {
-  //   id: 8,
-  //   name: "Pulau Tidung",
-  //   catchphrases: [
-  //     { text: "Jembatan Cinta" },
-  //     { text: "Snorkeling" },
-  //     { text: "Liburan Hemat" },
-  //   ],
-  //   images: [
-  //     {
-  //       url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pinewood.jpg",
-  //       highlight: true,
-  //     },
-  //   ],
-  //   isHero: false,
-  //   description:
-  //     "Eksplor keindahan Pulau Tidung dengan pengalaman snorkeling seru, wisata sepeda santai, dan sunset indah di Jembatan Cinta.",
-  //   price: 350_000,
-  //   location: "Kepulauan Seribu",
-  //   trip_duration: 1.5,
-  //   next_available_dates: ["2026-06-10", "2026-06-14", "2026-06-21"],
-  // facilities_included: dfi,
-  // facilities_excluded: dfe,
-  // itineraries: di
-  // },
-
-  // {
-  //   id: 9,
-  //   name: "Pulau Pramuka",
-  //   catchphrases: [
-  //     { text: "Konservasi Penyu" },
-  //     { text: "Island Escape" },
-  //     { text: "Santai" },
-  //   ],
-  //   images: [
-  //     {
-  //       url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pinewood.jpg",
-  //       highlight: true,
-  //     },
-  //   ],
-  //   isHero: false,
-  //   description:
-  //     "Rasakan pengalaman island hopping dan kunjungi pusat konservasi penyu di Pulau Pramuka dengan suasana laut yang menenangkan.",
-  //   price: 420_000,
-  //   location: "Kepulauan Seribu",
-  //   trip_duration: 3,
-  //   next_available_dates: ["2026-06-12", "2026-06-19", "2026-06-26"],
-  // facilities_included: dfi,
-  // facilities_excluded: dfe,
-  // itineraries: di
-  // },
-
-  // {
-  //   id: 10,
-  //   name: "Pulau Harapan",
-  //   catchphrases: [
-  //     { text: "Hidden Gem" },
-  //     { text: "Sunrise View" },
-  //     { text: "Healing" },
-  //   ],
-  //   images: [
-  //     {
-  //       url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pinewood.jpg",
-  //       highlight: true,
-  //     },
-  //   ],
-  //   isHero: false,
-  //   description:
-  //     "Nikmati suasana tenang dan pemandangan sunrise spektakuler sambil menjelajahi pulau-pulau kecil di sekitar Pulau Harapan.",
-  //   price: 550_000,
-  //   location: "Kepulauan Seribu",
-  //   trip_duration: 2,
-  //   next_available_dates: ["2026-06-15", "2026-06-22", "2026-06-29"],
-  // facilities_included: dfi,
-  // facilities_excluded: dfe,
-  // itineraries: di
-  // },
-
-  // {
-  //   id: 11,
-  //   name: "Pulau Macan",
-  //   catchphrases: [
-  //     { text: "Eco Resort" },
-  //     { text: "Private Escape" },
-  //     { text: "Luxury Island" },
-  //   ],
-  //   images: [
-  //     {
-  //       url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pinewood.jpg",
-  //       highlight: true,
-  //     },
-  //   ],
-  //   isHero: false,
-  //   description:
-  //     "Liburan eksklusif dengan konsep eco-resort yang cocok untuk honeymoon, staycation mewah, dan relaksasi total.",
-  //   price: 1_250_000,
-  //   location: "Kepulauan Seribu",
-  //   trip_duration: 4,
-  //   next_available_dates: ["2026-07-01", "2026-07-08", "2026-07-15"],
-  // facilities_included: dfi,
-  // facilities_excluded: dfe,
-  // itineraries: di
-  // },
-
-  // {
-  //   id: 12,
-  //   name: "Pulau Dolphin",
-  //   catchphrases: [
-  //     { text: "Petualangan Laut" },
-  //     { text: "Camping" },
-  //     { text: "Nature Trip" },
-  //   ],
-  //   images: [
-  //     {
-  //       url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pinewood.jpg",
-  //       highlight: true,
-  //     },
-  //   ],
-  //   isHero: false,
-  //   description:
-  //     "Cocok untuk pecinta alam dan petualangan dengan pengalaman camping pinggir pantai dan aktivitas laut yang seru.",
-  //   price: 780_000,
-  //   location: "Kepulauan Seribu",
-  //   trip_duration: 5,
-  //   next_available_dates: ["2026-07-03", "2026-07-10", "2026-07-17"],
-  // facilities_included: dfi,
-  // facilities_excluded: dfe,
-  // itineraries: di
-  // },
 ];
 
 export function getTripDurations() {
