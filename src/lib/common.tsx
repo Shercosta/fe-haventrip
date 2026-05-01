@@ -50,3 +50,20 @@ export function useNavigateAndScroll() {
     });
   };
 }
+
+export interface WaLinkProps {
+  phoneNumber?: string;
+  message?: string;
+}
+
+export function whatsappLink({
+  phoneNumber = "+6281818885271",
+  message,
+}: WaLinkProps) {
+  let link = `https://wa.me/${phoneNumber}`;
+
+  if (message) {
+    link += `?text=${message}`;
+  }
+  return link;
+}
