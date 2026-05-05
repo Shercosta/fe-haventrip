@@ -1,10 +1,23 @@
 import { useState } from "react";
 import type { HeroProps } from "./Hero";
 
-export function ExpandableDate({ heroDestination }: HeroProps) {
+export interface HeroDateSelectorProps extends HeroProps {
+  setParentDate?: (date: string) => void;
+}
+
+export function ExpandableDate({
+  heroDestination,
+  setParentDate,
+}: HeroDateSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
   const nextDate = heroDestination.next_available_dates[0];
   const [selectedDate, setSelectedDate] = useState(nextDate);
+
+  const handleDateClick = (date: string) => {
+    setSelectedDate(date);
+    setParentDate && setParentDate(date);
+    setIsOpen(false);
+  };
 
   return (
     <div className="relative">
@@ -73,7 +86,7 @@ export function ExpandableDate({ heroDestination }: HeroProps) {
                   transition-all
                 "
                 onClick={() => {
-                  setSelectedDate(date);
+                  handleDateClick(date);
                   setIsOpen(false);
                 }}
               >

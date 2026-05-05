@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { HavenTripText } from "./Haventrip-Text";
 import { Menu } from "lucide-react";
-import { idNavigator } from "../../lib/common";
+import { constructWhatsappChatAndOpen, idNavigator } from "../../lib/common";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -37,7 +37,14 @@ export function Navbar() {
           >
             Kontak
           </Button>
-          <Button variant={"secondary"}>Pesan Sekarang</Button>
+          <Button
+            variant={"secondary"}
+            onClick={() => {
+              constructWhatsappChatAndOpen({});
+            }}
+          >
+            Pesan Sekarang
+          </Button>
         </div>
 
         {/* Mobile toggle */}
@@ -60,10 +67,18 @@ export function Navbar() {
             <Button
               variant={"none"}
               className="text-white/80 justify-start hover:text-white"
+              onClick={() => idNavigator("footer")}
             >
               Kontak
             </Button>
-            <Button variant={"secondary"}>Pesan Sekarang</Button>
+            <Button
+              variant={"secondary"}
+              onClick={() => {
+                constructWhatsappChatAndOpen({});
+              }}
+            >
+              Pesan Sekarang
+            </Button>
           </div>
         </div>
       )}

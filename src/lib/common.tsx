@@ -1,6 +1,7 @@
 import { clsx } from "clsx";
 import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
+import { PHONENUMBER } from "./constants";
 
 export function cn(...inputs: any[]) {
   return twMerge(clsx(inputs));
@@ -57,13 +58,13 @@ export interface WaLinkProps {
 }
 
 export function whatsappLink({
-  phoneNumber = "+6281818885271",
+  phoneNumber = PHONENUMBER,
   message,
 }: WaLinkProps) {
   let link = `https://wa.me/${phoneNumber}`;
 
   if (message) {
-    link += `?text=${message}`;
+    link += `?text=${encodeURIComponent(message)}`;
   }
   return link;
 }
@@ -121,4 +122,47 @@ export function sortMeetingPointsWithDistance<T extends Coordinates>(
       distance: calculateDistance(userLocation, point),
     }))
     .sort((a, b) => a.distance - b.distance);
+}
+
+export interface Reservation {
+  destination?: string;
+  date?: string;
+  meetingPoint?: string;
+  amount?: number;
+}
+
+export function constructWhatsappChatAndOpen({
+  destination,
+  date,
+  meetingPoint,
+  amount,
+}: Reservation) {
+  let message = "Hai HavenTrip!\n";
+  message += "Saya ingin memesan trip";
+
+  message += ".\n\n";
+
+  if (destination) {
+    message += `Destinasi: ${destination}\n`;
+  }
+
+  if (date) {
+    message += `Tanggal: ${new Date(date).toLocaleDateString("id-ID", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })}\n`;
+  }
+
+  if (meetingPoint) {
+    message += `Meeting Point: ${meetingPoint}\n`;
+  }
+
+  if (amount) {
+    message += `Jumlah Peserta: ${amount} orang\n`;
+  }
+
+  const walink = whatsappLink({ message });
+  window.open(walink, "_blank");
 }

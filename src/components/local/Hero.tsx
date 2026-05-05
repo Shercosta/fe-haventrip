@@ -3,7 +3,12 @@ import { ChevronRightCircle, MapPin } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "../../lib/utils";
 import { ExpandableDate } from "./Expandable-Date";
-import { tripDurationToContext, useNavigateAndScroll } from "../../lib/common";
+import {
+  constructWhatsappChatAndOpen,
+  tripDurationToContext,
+  useNavigateAndScroll,
+} from "../../lib/common";
+import { useState } from "react";
 
 export interface HeroProps {
   heroDestination: Destination;
@@ -11,6 +16,9 @@ export interface HeroProps {
 
 export function Hero({ heroDestination }: HeroProps) {
   const navigateAndScroll = useNavigateAndScroll();
+  const [selectedDate, setSelectedDate] = useState<string>(
+    heroDestination.next_available_dates[0],
+  );
   return (
     <div id="hero" className="flex flex-col flex-1">
       {heroDestination.catchphrases ? (
@@ -69,7 +77,10 @@ export function Hero({ heroDestination }: HeroProps) {
               />
             </div>
 
-            <ExpandableDate heroDestination={heroDestination} />
+            <ExpandableDate
+              heroDestination={heroDestination}
+              setParentDate={setSelectedDate}
+            />
 
             <div className="flex lg:hidden text-sm gap-2 items-center text-white/60">
               <MapPin /> {heroDestination.location}
@@ -83,7 +94,16 @@ export function Hero({ heroDestination }: HeroProps) {
                 {tripDurationToContext(heroDestination.trip_duration)}
               </span>
             </div>
-            <Button className="w-full" variant={"secondary"}>
+            <Button
+              className="w-full"
+              variant={"secondary"}
+              onClick={() => {
+                constructWhatsappChatAndOpen({
+                  destination: heroDestination.name,
+                  date: selectedDate,
+                });
+              }}
+            >
               Reservasi
             </Button>
           </div>
