@@ -557,6 +557,7 @@ export function DestinationPage() {
                     destination: destination.name,
                     date: selectedDate ?? undefined,
                     amount: passengerCount,
+                    meetingPoint: selectedMeetingPoint?.name ?? undefined,
                   });
                 }}
               >
