@@ -3,15 +3,14 @@ import { ChevronRightCircle, MapPin } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "../../lib/utils";
 import { ExpandableDate } from "./Expandable-Date";
-import { tripDurationToContext } from "../../lib/common";
-import { useNavigate } from "react-router-dom";
+import { tripDurationToContext, useNavigateAndScroll } from "../../lib/common";
 
 export interface HeroProps {
   heroDestination: Destination;
 }
 
 export function Hero({ heroDestination }: HeroProps) {
-  const navigate = useNavigate();
+  const navigateAndScroll = useNavigateAndScroll();
   return (
     <div id="hero" className="flex flex-col flex-1">
       {heroDestination.catchphrases ? (
@@ -64,7 +63,9 @@ export function Hero({ heroDestination }: HeroProps) {
               </div>
               <ChevronRightCircle
                 className="text-white/40 hover:text-white hover:scale-110 transition cursor-pointer"
-                onClick={() => navigate(`/destination/${heroDestination.id}`)}
+                onClick={() => {
+                  navigateAndScroll(`/destination/${heroDestination.id}`);
+                }}
               />
             </div>
 
