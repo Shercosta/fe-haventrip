@@ -1,12 +1,18 @@
 import { getDestinationById } from "@/arrays/destinations";
 import ItinerarySection from "@/components/local/Itineraries";
 import { Button } from "@/components/ui/button";
-import { idNavigator, tripDurationToContext } from "@/lib/common";
+import { useUserLocationContext } from "@/context/UserLocationContext";
+import {
+  idNavigator,
+  sortMeetingPointsWithDistance,
+  tripDurationToContext,
+} from "@/lib/common";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export function DestinationPage() {
   const { id } = useParams();
+  const { location: userLocation } = useUserLocationContext();
 
   const destination = getDestinationById(Number(id));
 
@@ -297,7 +303,13 @@ export function DestinationPage() {
               <h2 className="text-3xl font-bold mb-8">Meeting Points</h2>
 
               <div className="space-y-4">
-                {destination.meeting_points.map((meetingPoint, index) => (
+                {(userLocation
+                  ? sortMeetingPointsWithDistance(
+                      userLocation,
+                      destination.meeting_points,
+                    )
+                  : destination.meeting_points
+                ).map((meetingPoint, index) => (
                   <div
                     key={meetingPoint.name}
                     className="
@@ -333,9 +345,14 @@ export function DestinationPage() {
                         <p className="font-medium">{meetingPoint.name}</p>
 
                         {/* Future enhancement */}
-                        {/* <p className="text-sm text-muted-foreground">
-              4.2 km away
-            </p> */}
+                        {(meetingPoint as { distance?: number }).distance && (
+                          <p className="text-sm text-muted-foreground">
+                            {(
+                              meetingPoint as { distance?: number }
+                            ).distance?.toFixed(2)}{" "}
+                            KM
+                          </p>
+                        )}
                       </div>
                     </div>
 

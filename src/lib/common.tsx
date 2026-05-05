@@ -68,59 +68,57 @@ export function whatsappLink({
   return link;
 }
 
-export const getUserLocation = () => {
-  if (!navigator.geolocation) {
-    alert("Geolocation is not supported by your browser.");
-    return;
-  }
+// lib/location-utils.ts
 
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
+export interface Coordinates {
+  latitude: number;
+  longitude: number;
+}
 
-      console.log("Lat:", latitude);
-      console.log("Lng:", longitude);
-    },
-    (error) => {
-      console.error(error);
+/**
+ * Calculate distance between 2 coordinates in KM
+ */
+export function calculateDistance(a: Coordinates, b: Coordinates): number {
+  const R = 6371; // Earth radius in km
 
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          alert("Location permission denied");
-          break;
-        case error.POSITION_UNAVAILABLE:
-          alert("Location unavailable");
-          break;
-        case error.TIMEOUT:
-          alert("Location request timed out");
-          break;
-      }
-    },
-    {
-      enableHighAccuracy: true,
-      timeout: 10000,
-    },
-  );
-};
+  const dLat = ((b.latitude - a.latitude) * Math.PI) / 180;
+  const dLon = ((b.longitude - a.longitude) * Math.PI) / 180;
 
-export function calculateDistance(
-  lat1: number,
-  lon1: number,
-  lat2: number,
-  lon2: number,
-) {
-  const R = 6371; // km
+  const lat1 = (a.latitude * Math.PI) / 180;
+  const lat2 = (b.latitude * Math.PI) / 180;
 
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
-
-  const a =
+  const x =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
 
-  return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+  const distance = 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+
+  return R * distance;
+}
+
+/**
+ * Sort meeting points by closest distance to user
+ */
+export function sortMeetingPointsByDistance<T extends Coordinates>(
+  userLocation: Coordinates,
+  meetingPoints: T[],
+): T[] {
+  return [...meetingPoints].sort((a, b) => {
+    const distA = calculateDistance(userLocation, a);
+    const distB = calculateDistance(userLocation, b);
+
+    return distA - distB;
+  });
+}
+
+export function sortMeetingPointsWithDistance<T extends Coordinates>(
+  userLocation: Coordinates,
+  meetingPoints: T[],
+) {
+  return meetingPoints
+    .map((point) => ({
+      ...point,
+      distance: calculateDistance(userLocation, point),
+    }))
+    .sort((a, b) => a.distance - b.distance);
 }

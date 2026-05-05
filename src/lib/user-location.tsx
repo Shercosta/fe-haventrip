@@ -24,11 +24,13 @@ export function useUserLocation() {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
+        console.log("Pass 1");
         setLoading(false);
       },
       (err) => {
         setLoading(false);
 
+        console.log("Pass 2");
         switch (err.code) {
           case err.PERMISSION_DENIED:
             setError("Permission denied");
