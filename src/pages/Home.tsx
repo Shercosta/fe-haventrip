@@ -3,6 +3,7 @@ import { Hero } from "../components/local/Hero";
 import { Destination } from "../components/local/Destination";
 import { useHero } from "../context/HeroContext";
 import { Footer } from "../components/local/Footer";
+import { UserLocationRequest } from "@/components/local/UserLocationRequest";
 
 function HomePage() {
   const { hero: heroDestination } = useHero();
@@ -46,6 +47,9 @@ function HomePage() {
 
       <Destination />
       <Footer />
+
+      {/* user location request */}
+      <UserLocationRequest />
     </section>
   );
 }
