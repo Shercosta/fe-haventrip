@@ -7,12 +7,16 @@ import {
   sortMeetingPointsWithDistance,
   tripDurationToContext,
 } from "@/lib/common";
+import { cn } from "@/lib/utils";
+import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export function DestinationPage() {
   const { id } = useParams();
   const { location: userLocation } = useUserLocationContext();
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [passengerCount, setPassengerCount] = useState<number>(1);
 
   const destination = getDestinationById(Number(id));
 
@@ -148,6 +152,7 @@ export function DestinationPage() {
             ["excluded", "Fasilitas Excluded"],
             ["itinerary", "Itinerary"],
             ["dates", "Tanggal Tersedia"],
+            ["meeting_points", "Meeting Points"],
           ].map(([id, label]) => (
             <Button
               key={id}
@@ -302,7 +307,7 @@ export function DestinationPage() {
             <section className="mt-16">
               <h2 className="text-3xl font-bold mb-8">Meeting Points</h2>
 
-              <div className="space-y-4">
+              <div className="space-y-4" id="meeting_points">
                 {(userLocation
                   ? sortMeetingPointsWithDistance(
                       userLocation,
@@ -404,6 +409,134 @@ export function DestinationPage() {
                 </div>
               </div>
 
+              {/* dates */}
+
+              <h3 className="text-xl font-bold mb-5">Tanggal Tersedia</h3>
+
+              <div className="space-y-3 mb-4" id="dates">
+                {destination.next_available_dates.map((date, index) => (
+                  <div
+                    key={index}
+                    className={cn([
+                      "border border-slate-200 rounded-2xl px-4 py-3 hover:border-sky-400 transition-colors",
+                      selectedDate === date && "bg-sky-300",
+                    ])}
+                    onClick={() => {
+                      setSelectedDate((prev) => (prev === date ? null : date));
+                    }}
+                  >
+                    {new Date(date).toLocaleDateString("id-ID", {
+                      weekday: "long",
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </div>
+                ))}
+              </div>
+
+              <h3 className="text-lg font-semibold mb-4">Jumlah Pemesan</h3>
+              <div
+                className="
+    rounded-2xl
+    border
+    border-border
+    p-5
+    bg-background/70
+    backdrop-blur-sm
+    shadow-sm
+    w-full
+    max-w-sm
+    mb-4
+  "
+              >
+                <div className="flex items-center justify-between">
+                  {/* Minus */}
+                  <button
+                    onClick={() =>
+                      setPassengerCount((prev) => Math.max(1, prev - 1))
+                    }
+                    disabled={passengerCount <= 1}
+                    className="
+        w-10 h-10
+        rounded-full
+        border
+        border-border
+        flex items-center justify-center
+        hover:bg-muted
+        active:scale-95
+        transition
+        disabled:opacity-40
+        disabled:cursor-not-allowed
+      "
+                  >
+                    <Minus className="w-4 h-4" />
+                  </button>
+
+                  {/* Input */}
+                  <div className="text-center">
+                    <input
+                      type="number"
+                      min={1}
+                      value={passengerCount}
+                      onChange={(e) => {
+                        const value = e.target.value;
+
+                        // Allow empty while typing
+                        if (value === "") {
+                          setPassengerCount(0);
+                          return;
+                        }
+
+                        const num = Number(value);
+
+                        if (!isNaN(num)) {
+                          setPassengerCount(Math.max(1, num));
+                        }
+                      }}
+                      onBlur={() => {
+                        // Fix empty / zero on blur
+                        if (!passengerCount || passengerCount < 1) {
+                          setPassengerCount(1);
+                        }
+                      }}
+                      onWheel={(e) => e.currentTarget.blur()}
+                      className="
+          w-20
+          text-center
+          text-2xl
+          font-bold
+          bg-transparent
+          outline-none
+          border-b
+          border-border
+          focus:border-primary
+          transition
+        "
+                    />
+
+                    <p className="text-xs text-muted-foreground mt-1">orang</p>
+                  </div>
+
+                  {/* Plus */}
+                  <button
+                    onClick={() => setPassengerCount((prev) => prev + 1)}
+                    className="
+        w-10 h-10
+        rounded-full
+        bg-primary
+        text-white
+        flex items-center justify-center
+        hover:opacity-90
+        active:scale-95
+        transition
+      "
+                  >
+                    <Plus className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
               <Button
                 className="
                   w-full
@@ -419,33 +552,6 @@ export function DestinationPage() {
                 Pesan Sekarang
               </Button>
             </div>
-
-            {/* dates */}
-            <section id="dates" className="bg-white rounded-3xl p-8 shadow-sm">
-              <h3 className="text-2xl font-bold mb-5">Tanggal Tersedia</h3>
-
-              <div className="space-y-3">
-                {destination.next_available_dates.map((date, index) => (
-                  <div
-                    key={index}
-                    className="
-                      border border-slate-200
-                      rounded-2xl
-                      px-4 py-3
-                      hover:border-sky-400
-                      transition-colors
-                    "
-                  >
-                    {new Date(date).toLocaleDateString("id-ID", {
-                      weekday: "long",
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </div>
-                ))}
-              </div>
-            </section>
           </div>
         </div>
       </section>
