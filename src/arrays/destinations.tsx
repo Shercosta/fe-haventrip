@@ -42,7 +42,7 @@ export const availableMeetingPoints = {
   },
 } as const satisfies Record<string, Meeting_Point_Destination>;
 
-type AvailableMeetingPoint =
+export type AvailableMeetingPoint =
   (typeof availableMeetingPoints)[keyof typeof availableMeetingPoints];
 
 export interface Destination {

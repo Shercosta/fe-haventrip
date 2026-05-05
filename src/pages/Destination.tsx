@@ -1,8 +1,12 @@
-import { getDestinationById } from "@/arrays/destinations";
+import {
+  type AvailableMeetingPoint,
+  getDestinationById,
+} from "@/arrays/destinations";
 import ItinerarySection from "@/components/local/Itineraries";
 import { Button } from "@/components/ui/button";
 import { useUserLocationContext } from "@/context/UserLocationContext";
 import {
+  constructWhatsappChatAndOpen,
   idNavigator,
   sortMeetingPointsWithDistance,
   tripDurationToContext,
@@ -16,6 +20,8 @@ export function DestinationPage() {
   const { id } = useParams();
   const { location: userLocation } = useUserLocationContext();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedMeetingPoint, setSelectedMeetingPoint] =
+    useState<AvailableMeetingPoint | null>(null);
   const [passengerCount, setPassengerCount] = useState<number>(1);
 
   const destination = getDestinationById(Number(id));
@@ -317,33 +323,27 @@ export function DestinationPage() {
                 ).map((meetingPoint, index) => (
                   <div
                     key={meetingPoint.name}
-                    className="
-          flex
-          items-center
-          justify-between
-          gap-4
-          border-b
-          border-border
-          pb-4
-        "
+                    className="flex items-center justify-between gap-4 border-b border-border pb-4 cursor-pointer"
+                    onClick={() => {
+                      setSelectedMeetingPoint((prev) =>
+                        prev?.name === meetingPoint.name ? null : meetingPoint,
+                      );
+                    }}
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className="
-              w-8
-              h-8
-              rounded-full
-              bg-primary/10
-              text-primary
-              flex
-              items-center
-              justify-center
-              text-sm
-              font-semibold
-              shrink-0
-            "
+                        className={cn([
+                          "w-8 h-8 rounded-full text-primary flex items-center justify-center text-sm font-semibold shrink-0",
+                          selectedMeetingPoint?.name === meetingPoint.name
+                            ? "bg-sky-500 text-white"
+                            : "bg-primary/10",
+                        ])}
                       >
-                        {index + 1}
+                        {selectedMeetingPoint
+                          ? selectedMeetingPoint.name === meetingPoint.name
+                            ? "✓"
+                            : index + 1
+                          : index + 1}
                       </div>
 
                       <div>
@@ -373,6 +373,9 @@ export function DestinationPage() {
               hover:underline
               whitespace-nowrap
             "
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
                       >
                         Open Maps →
                       </a>
@@ -420,6 +423,7 @@ export function DestinationPage() {
                     className={cn([
                       "border border-slate-200 rounded-2xl px-4 py-3 hover:border-sky-400 transition-colors",
                       selectedDate === date && "bg-sky-300",
+                      "cursor-pointer",
                     ])}
                     onClick={() => {
                       setSelectedDate((prev) => (prev === date ? null : date));
@@ -548,6 +552,13 @@ export function DestinationPage() {
                   font-bold
                   text-lg
                 "
+                onClick={() => {
+                  constructWhatsappChatAndOpen({
+                    destination: destination.name,
+                    date: selectedDate ?? undefined,
+                    amount: passengerCount,
+                  });
+                }}
               >
                 Pesan Sekarang
               </Button>
