@@ -142,6 +142,101 @@ export const destinations: Destination[] = [
     price: 180_000,
     location: "Kepulauan Seribu",
     trip_duration: 1,
+    next_available_dates: [
+      "2026-06-14",
+      "2026-06-15",
+      "2026-06-16",
+      "2026-06-17",
+    ],
+    facilities_included: [
+      "Snorkeling",
+      "Kapal pulang pergi",
+      "Tiket pulau pari",
+      "Tiket pantai pasir perawan",
+      "Mineral water",
+      "Tour guide",
+      "Dokumentasi",
+      "Retribusi pulau",
+    ],
+    facilities_excluded: [
+      "Jetski",
+      "Canoe",
+      "Bentor antar jemput",
+      "Banana boat",
+      "Explore mangrove",
+    ],
+    itineraries: [
+      {
+        day: 1,
+        times: [
+          {
+            time: "06.30",
+            label: "Meeting point",
+          },
+          {
+            time: "07.00",
+            label: "Naik kapal menuju pulau pari",
+          },
+          {
+            time: "10.00",
+            label: "Sampai di Pulau Pari",
+          },
+          {
+            time: "10.30",
+            label: "Snorkeling dan Aktivitas Air Lainnya",
+          },
+          {
+            time: "12.00",
+            label: "Ishoma",
+          },
+          {
+            time: "12.30",
+            label: "Acara bebas di Pantai Pasir Perawan",
+          },
+          {
+            time: "14.00",
+            label: "Ganti baju dan persiapan pulang",
+          },
+          {
+            time: "15.00",
+            label: "Naik kapal menuju pulang",
+          },
+          {
+            time: "17.30",
+            label: "Sunset di Kapal",
+          },
+          {
+            time: "18.00",
+            label: "Sampai Jakarta dan Trip Selesai",
+          },
+        ],
+      },
+    ],
+    meeting_points: [availableMeetingPoints.MuaraKamal],
+  },
+];
+
+export const destinations_old: Destination[] = [
+  {
+    id: 1,
+    name: "Pulau Pari",
+    catchphrases: [
+      { text: "Surga" },
+      { text: "Tropis", colorHex: "#FFFFFF", opacity: 0.7 },
+      { text: "Dekat Jakarta" },
+    ],
+    images: [
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari.webp",
+        highlight: true,
+      },
+    ],
+    isHero: true,
+    description:
+      "Nikmati pasir putih, laut sebening kristal, dan suasana pulau yang tenang di Pulau Pari. Tempat sempurna untuk healing, snorkeling, dan menikmati sunset romantis hanya beberapa jam dari Jakarta.",
+    price: 180_000,
+    location: "Kepulauan Seribu",
+    trip_duration: 1,
     next_available_dates: ["2026-06-06", "2026-06-07", "2026-06-08"],
     facilities_included: dfi,
     facilities_excluded: dfe,
