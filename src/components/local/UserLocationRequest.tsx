@@ -39,6 +39,11 @@ export function UserLocationRequest() {
     setShow(false);
   };
 
+  const handleAllow = async () => {
+    setHasRequested(true);
+    requestLocation();
+  };
+
   if (!show) return null;
 
   return (
@@ -62,7 +67,7 @@ export function UserLocationRequest() {
             </button>
 
             <button
-              onClick={requestLocation}
+              onClick={handleAllow}
               disabled={loading}
               className="px-3 py-1.5 rounded-lg bg-primary text-white text-xs font-medium"
             >
