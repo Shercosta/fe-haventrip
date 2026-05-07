@@ -51,10 +51,10 @@ export function UserLocationRequest() {
       <div className="rounded-2xl border border-border bg-background/90 backdrop-blur-md shadow-xl p-4">
         <div className="flex flex-col gap-3">
           <div>
-            <p className="font-semibold text-sm">Use your location?</p>
+            <p className="font-semibold text-sm">Gunakan lokasi?</p>
             <p className="text-xs text-muted-foreground mt-1">
-              We use your location to calculate the nearest meeting point for
-              your trip.
+              Kami menggunakan lokasi untuk menemukan meeting point trip
+              terdekat dari anda.
             </p>
           </div>
 
@@ -63,7 +63,7 @@ export function UserLocationRequest() {
               onClick={handleDismiss}
               className="text-xs text-muted-foreground hover:underline"
             >
-              Not now
+              Tidak
             </button>
 
             <button
@@ -71,7 +71,7 @@ export function UserLocationRequest() {
               disabled={loading}
               className="px-3 py-1.5 rounded-lg bg-primary text-white text-xs font-medium"
             >
-              {loading ? "Requesting..." : "Use my location"}
+              {loading ? "Memproses..." : "Gunakan lokasi"}
             </button>
           </div>
 
