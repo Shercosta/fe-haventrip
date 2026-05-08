@@ -58,8 +58,8 @@ export function Footer() {
               leading-relaxed
             "
           >
-            Curated island escapes, hidden beaches, and unforgettable journeys
-            across Indonesia's most beautiful destinations.
+            Jelajahi pulau pilihan, pantai tersembunyi, dan perjalanan tak
+            terlupakan melintasi destinasi terindah di Indonesia.
           </p>
         </div>
       </div>
