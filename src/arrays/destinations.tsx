@@ -135,6 +135,46 @@ export const destinations: Destination[] = [
         url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari.webp",
         highlight: true,
       },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/1.jpg",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/2.jpg",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/3.jpg",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/4.jpg",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/5.jpg",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/6.jpg",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/7.jpg",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/8.jpg",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/9.jpg",
+        highlight: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/1.jpg",
+        highlight: false,
+      },
     ],
     isHero: true,
     description:
