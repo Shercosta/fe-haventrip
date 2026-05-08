@@ -171,10 +171,6 @@ export const destinations: Destination[] = [
         url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/9.jpg",
         highlight: false,
       },
-      {
-        url: "https://raw.githubusercontent.com/Shercosta/fe-haventrip/refs/heads/master/public/pulau-pari/1.jpg",
-        highlight: false,
-      },
     ],
     isHero: true,
     description:
