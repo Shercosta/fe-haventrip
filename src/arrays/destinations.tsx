@@ -178,7 +178,7 @@ export const destinations: Destination[] = [
     price: 180_000,
     location: "Kepulauan Seribu",
     trip_duration: 1,
-    next_available_dates: ["2026-07-06", "2026-07-20"],
+    next_available_dates: ["2026-06-06", "2026-06-20"],
     facilities_included: [
       "Snorkeling",
       "Kapal pulang pergi",
