@@ -2,7 +2,7 @@
 
 import type { Itinerary_Day_Destination } from "@/arrays/destinations";
 import { cn } from "@/lib/utils";
-import { Clock3, CalendarDays } from "lucide-react";
+import { Clock3, CalendarDays, Info } from "lucide-react";
 import { useState } from "react";
 
 interface Props {
@@ -22,6 +22,16 @@ export default function ItinerarySection({ itineraries }: Props) {
       </div>
 
       <div className="space-y-8">
+        <div className="mb-6 flex items-start gap-3 rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-muted-foreground">
+          <Info className="w-4 h-4 mt-0.5 text-primary shrink-0" />
+
+          <p>
+            Itinerary dapat berubah tergantung pada cuaca, lalu lintas, kondisi
+            laut, dan keadaan operasional untuk memastikan pengalaman dan
+            keselamatan terbaik.
+          </p>
+        </div>
+
         <div
           key={selectedDay.day}
           className="
